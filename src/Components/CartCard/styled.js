@@ -8,7 +8,7 @@ export const Card = styled.div`
   height: 120px;
   width: 360px;
   margin: 8px 0 0;
-  padding: 8px 16px 0;
+  padding: 8px 16px 0 0;
 
   #Retangle {
     width: 328px;
@@ -33,12 +33,13 @@ export const Card = styled.div`
     flex-direction: column;
 
     position: relative;
+    box-sizing:content-box;
 
     #Header {
       #Title {
         width: 167px;
         height: 18px;
-        margin: 18px 16px 8px 0;
+        margin: 18px 16px 0 0;
         font-family: "Roboto", sans-serif;
         font-size: 16px;
         font-weight: normal;
@@ -64,25 +65,26 @@ export const Card = styled.div`
       }
     }
 
-    #Main{
-        width: 200px;
-        height: 30px;
-        margin: 8px 16px 4px 0;
-        font-family: 'Roboto';
-        font-size: 12px;
-        font-weight: normal;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: normal;
-        letter-spacing: -0.29px;
-        color: var(--greyish);
+    #Main {
+      width: 200px;
+      height: 30px;
+      margin: 8px 16px 4px 0;
+      font-family: "Roboto";
+      font-size: 12px;
+      font-weight: normal;
+      font-stretch: normal;
+      font-style: normal;
+      line-height: normal;
+      letter-spacing: -0.29px;
+      color: var(--greyish);
     }
 
-    #Footer{
+    #Footer {
+      #price {
         width: 118px;
         height: 19px;
-        margin: 4px 8px 15px 16px;
-        font-family: 'Roboto';
+        margin: 4px 8px 15px 0px;
+        font-family: "Roboto";
         font-size: 16px;
         font-weight: normal;
         font-stretch: normal;
@@ -90,21 +92,22 @@ export const Card = styled.div`
         line-height: normal;
         letter-spacing: -0.39px;
         color: #000000;
+      }
 
-        #remove-btn{
-            width: 90px;
-            height: 31px;
-            margin: 7px 0 0 8px;
-            padding: 8px 23px 9px 24px;
-            border-radius: 8px 0 8px 0;
-            border: 1px solid #e02020;
-            background: transparent;
-            color: #e02020;
+      #remove-btn {
+        width: 90px;
+        height: 31px;
+        margin: 7px 0 0 8px;
+        padding: 8px 23px 9px 24px;
+        border-radius: 8px 0 8px 0;
+        border: 1px solid #e02020;
+        background: transparent;
+        color: #e02020;
 
-            position: absolute;
-            bottom: 0;
-            right: 1px;
-        }
+        position: absolute;
+        bottom: 0;
+        right: 1px;
+      }
     }
   }
 `;
