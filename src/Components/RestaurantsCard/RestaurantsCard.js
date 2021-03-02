@@ -2,7 +2,7 @@ import React from "react";
 import { ResCard, Info } from "./styled";
 import img from "./img/image.png";
 
-const RestaurntsCard = () => {
+const RestaurantsCard = () => {
   return (
     <ResCard>
       <div id="Rectangle">
@@ -20,4 +20,4 @@ const RestaurntsCard = () => {
   );
 };
 
-export default RestaurntsCard;
+export default RestaurantsCard;

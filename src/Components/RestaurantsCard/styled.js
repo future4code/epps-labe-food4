@@ -6,7 +6,7 @@ export const ResCard = styled.div`
   align-items: center;
 
   #Rectangle {
-    width: 328px;
+    width: 329px;
     height: 188px;
     padding: 0 0 16px;
     border-radius: 8px;
