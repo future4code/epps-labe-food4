@@ -18,6 +18,8 @@ function ComponentInputs() {
             display: 'flex',
             flexWrap: 'wrap',
             justifyContent: 'center',
+            alignItems: 'center',
+            height: '72px',
         },
         margin: {
             margin: '8px 0',
