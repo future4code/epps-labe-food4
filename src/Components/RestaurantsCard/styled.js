@@ -4,6 +4,10 @@ export const ResCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  width:360px;
+  height:196px;
+  margin:8px 0 0;
+  padding:8px 16px 0;
 
   #Rectangle {
     width: 329px;
@@ -13,10 +17,10 @@ export const ResCard = styled.div`
     border: solid 1px var(--greyish);
   }
 
-  #Restaurante {
+  #Restaurant {
     width: 296px;
     height: 18px;
-    margin: 12px 16px 4px;
+    margin: 12px 16px 0;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -30,7 +34,7 @@ export const ResCard = styled.div`
 
 export const Info = styled.div`
   display: flex;
-  #Tempo-de-entrega {
+  #Delivery {
     width: 148px;
     height: 18px;
     margin: 4px 8px 0 16px;
@@ -44,7 +48,7 @@ export const Info = styled.div`
     color: var(--greyish);
   }
 
-  #Taxa-de-entrega {
+  #Tax {
     width: 140px;
     height: 18px;
     margin: 4px 16px 0 8px;

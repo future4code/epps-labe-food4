@@ -1,21 +1,19 @@
 import React from "react";
 import { ResCard, Info } from "./styled";
-import img from "./img/image.png";
 
-const RestaurantsCard = () => {
+const RestaurantsCard = (props) => {
   return (
     <ResCard>
       <div id="Rectangle">
         <div id="Image">
-          <img src={img} />
+          <img src={props.img} />
         </div>
-        <p id="Restaurante">Vinil Butantã</p>
+        <p id="Restaurant">{props.restaurant}</p>
         <Info>
-        <p id="Tempo-de-entrega">50 - 60 min</p>
-        <p id="Taxa-de-entrega">Frete R$6,00</p>
+          <p id="Delivery-Time">{props.deliveryTime}</p>
+          <p id="Tax">{props.tax}</p>
         </Info>
       </div>
-      
     </ResCard>
   );
 };
