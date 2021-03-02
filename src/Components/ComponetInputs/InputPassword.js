@@ -11,7 +11,7 @@ import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import theme from './Theme/theme';
 
-function ComponentInputs() {
+function ComponentInputs(props) {
 
     const useStyles = makeStyles((theme) => ({
         root: {
@@ -55,7 +55,7 @@ function ComponentInputs() {
         <ThemeProvider theme={theme}>
             <div className={classes.root}>
                 <FormControl className={clsx(classes.margin, classes.textField)} variant="outlined">
-                    <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
+                    <InputLabel htmlFor="outlined-adornment-password">{props.label}</InputLabel>
                     <OutlinedInput
                         placeholder='Mínimo de 6 caracteres'
                         id="outlined-adornment-password"

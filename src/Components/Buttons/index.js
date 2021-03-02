@@ -7,7 +7,7 @@ const Buttons = (props) =>{
             
                 <Btn>
                     
-                    <p>Criar</p>
+                    <p>{props.text}</p>
                     
                 </Btn>
             
