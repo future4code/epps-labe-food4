@@ -6,12 +6,12 @@ const RestaurantsCard = (props) => {
     <ResCard>
       <div id="Rectangle">
         <div id="Image">
-          <img src={props.img} />
+          <img src={props.img} alt='imagem do restaurante'/>
         </div>
         <p id="Restaurant">{props.restaurant}</p>
         <Info>
-          <p id="Delivery-Time">{props.deliveryTime}</p>
-          <p id="Tax">{props.tax}</p>
+          <p id="Delivery-Time">{props.deliveryTime} min</p>
+          <p id="Tax">Frete {props.tax}</p>
         </Info>
       </div>
     </ResCard>
