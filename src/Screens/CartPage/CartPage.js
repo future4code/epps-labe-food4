@@ -1,5 +1,4 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import CartCard from "../../Components/CartCard/index";
 import {
   FormControl,
@@ -11,19 +10,21 @@ import {
   AdressDelivery,
   AdressContainer,
   CartContainer,
-  Title,
   ShippingText,
   SubtotalPrice,
   TotalPrice,
   PaymentMethodText,
-  DivBorder,
   CheckBox,
+  Title,
 } from "./styled";
+import Buttons from "../../Components/Buttons";
+import { getUserAdress, placeOrder } from "../../Services/user";
+import GlobalStateContext from "../../GlobalState/GlobalStateContext";
 
 export const CartPage = () => {
+  const { states, setters } = useContext(GlobalStateContext);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [userAdress, setUserAdress] = useState(undefined);
-  const [cart, setCart] = useState([]);
 
   useEffect(() => {
     getUserAdress(setUserAdress);
@@ -33,26 +34,8 @@ export const CartPage = () => {
     setPaymentMethod(event.target.value);
   };
 
-  const getUserAdress = () => {
-    axios
-      .get(
-        "https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/profile/adress",
-        {
-          headers: {
-            Authorization: localStorage.getItem("token"),
-          },
-        }
-      )
-      .then((response) => {
-        setUserAdress(response.data.adress);
-      })
-      .catch((error) => {
-        console.log(error.response);
-      });
-  };
-
-  const removeItem = (id) => {
-    const newProducts = cart.products.map((product) => {
+  const removeItemFromCart = (id) => {
+    const newProducts = states.cart.products.map((product) => {
       if (product.id === id) {
         const newQuantity = product.quantity - 1;
         const completeProduct = {
@@ -64,19 +47,44 @@ export const CartPage = () => {
         return product;
       }
     });
-    const newCart = { ...cart, products: newProducts };
-    setCart(newCart);
+    const newCart = { ...states.cart, products: newProducts };
+    setters.setCart(newCart);
   };
 
   const subTotal = () => {
     let number = 0;
-    if (Object.entries(cart).length !== 0) {
-      cart.products.forEach((item) => {
+    if (Object.entries(states.cart).length !== 0) {
+      states.cart.products.forEach((item) => {
         number += item.price * item.quantity;
       });
-      return cart.shipping + number;
+      return states.cart.shipping + number;
     }
     return 0;
+  };
+
+  const sendOrder = () => {
+    if (!paymentMethod) {
+      alert("Selecione um método de pagamento.");
+    } else if (Object.entries(states.cart).length !== 0) {
+      const productsArray = states.cart.products
+        .filter((item) => {
+          return item.quantity > 0;
+        })
+        .map((product) => {
+          return {
+            id: product.id,
+            quantity: product.quantity,
+          };
+        });
+
+      const body = {
+        products: productsArray,
+        paymentMethod: paymentMethod,
+      };
+      placeOrder(body, states.cart.id);
+    } else {
+      alert("Escolha um produto!");
+    }
   };
 
   return (
@@ -90,10 +98,20 @@ export const CartPage = () => {
         )}
       </AdressContainer>
 
-      {Object.entries(cart).length !== 0 ? (
-        cart.products.map((product) => {
+      {Object.entries(states.cart).length !== 0 ? (
+        states.cart.products.map((product) => {
           if (product.quantity > 0) {
-            return <CartCard />;
+            return (
+              <CartCard
+                id={product.id}
+                quantity={product.quantity}
+                img={product.photoUrl}
+                name={product.name}
+                description={product.description}
+                price={product.price}
+                removeItem={removeItemFromCart}
+              />
+            );
           }
         })
       ) : (
@@ -127,6 +145,7 @@ export const CartPage = () => {
           </RadioGroup>
         </FormControl>
       </CheckBox>
+      <Buttons text="CONFIRMAR" onClick={sendOrder}></Buttons>
     </CartContainer>
   );
 };
