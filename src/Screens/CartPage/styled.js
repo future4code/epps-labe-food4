@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const CartContainer = styled.div`
   width: 100vw;
-  max-width: 375px;
+  max-width: 420px;
 `;
 
 export const AdressContainer = styled.div`
   width: 100vw;
-  max-width: 375px;
+  max-width: 420px;
   height: 76px;
   margin: 1px 0 8px;
   padding: 16px;
@@ -15,7 +15,8 @@ export const AdressContainer = styled.div`
 `;
 
 export const AdressDelivery = styled.p`
-  width: 375px;
+  width: 100vw;
+  max-width: 420px;
   height: 18px;
   margin: 0 0 8px;
   font-size: 16px;
@@ -25,7 +26,7 @@ export const AdressDelivery = styled.p`
 
 export const Title = styled.p`
   width: 100vw;
-  max-width: 375px;
+  max-width: 420px;
   height: 42px;
   margin: 18px 0 33px;
   padding: 12px 32px;
@@ -54,10 +55,11 @@ export const TotalPrice = styled.p`
 `;
 
 export const PaymentMethodText = styled.p`
-  width: 375px;
+  width: 100vw;
+  max-width: 420px;
   height: 18px;
   margin: 24px 16px 8px;
-  font-size: 16px;  
+  font-size: 16px;
   letter-spacing: -0.39px;
   color: var(--black-25);
 `;

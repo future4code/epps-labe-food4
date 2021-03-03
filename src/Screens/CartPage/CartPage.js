@@ -34,6 +34,31 @@ export const CartPage = () => {
     setPaymentMethod(event.target.value);
   };
 
+  const sendOrder = () => {
+    if (!paymentMethod) {
+      alert("Selecione um método de pagamento.");
+    } else if (Object.entries(states.cart).length !== 0) {
+      const productsArray = states.cart.products
+        .filter((item) => {
+          return item.quantity > 0;
+        })
+        .map((product) => {
+          return {
+            id: product.id,
+            quantity: product.quantity,
+          };
+        });
+
+      const body = {
+        products: productsArray,
+        paymentMethod: paymentMethod,
+      };
+      placeOrder(body, states.cart.id);
+    } else {
+      alert("Escolha um produto!");
+    }
+  };
+
   const removeItemFromCart = (id) => {
     const newProducts = states.cart.products.map((product) => {
       if (product.id === id) {
@@ -60,31 +85,6 @@ export const CartPage = () => {
       return states.cart.shipping + number;
     }
     return 0;
-  };
-
-  const sendOrder = () => {
-    if (!paymentMethod) {
-      alert("Selecione um método de pagamento.");
-    } else if (Object.entries(states.cart).length !== 0) {
-      const productsArray = states.cart.products
-        .filter((item) => {
-          return item.quantity > 0;
-        })
-        .map((product) => {
-          return {
-            id: product.id,
-            quantity: product.quantity,
-          };
-        });
-
-      const body = {
-        products: productsArray,
-        paymentMethod: paymentMethod,
-      };
-      placeOrder(body, states.cart.id);
-    } else {
-      alert("Escolha um produto!");
-    }
   };
 
   return (
@@ -118,10 +118,10 @@ export const CartPage = () => {
         <Title>Carrinho vazio</Title>
       )}
 
-      <ShippingText>Frete R$</ShippingText>
+      <ShippingText>Frete R${states.cart.shipping}.00</ShippingText>
       <SubtotalPrice>
         <p>SUBTOTAL</p>
-        <TotalPrice>R${subTotal()}</TotalPrice>
+        <TotalPrice>R${subTotal()}.00</TotalPrice>
       </SubtotalPrice>
 
       <PaymentMethodText>Forma de pagamento</PaymentMethodText>

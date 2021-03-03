@@ -9,10 +9,10 @@ export const getUserAdress = (setUserAdress) => {
       },
     })
     .then((response) => {
-      setUserAdress(response.data.adress);
+      setUserAdress(response.data.address);
     })
     .catch((error) => {
-      console.log("Erro", error.response);
+      console.log(error.response);
     });
 };
 
