@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {useParams} from 'react-router-dom';
 import axios from "axios";
 import { BASE_URL } from "./../../Constants/Urls";
 import { Container } from "./styled";
@@ -6,11 +7,12 @@ import RestaurantInfo from "./RestaurantInfo";
 import CartCard from "../../Components/CartCard";
 
 const Restaurants = () => {
+  const { restaurantId } = useParams();
   const [restaurant, setRestaurant] = useState([]);
   const getRestaurants = async () => {
     const headers = { headers: { auth: localStorage.getItem("token") } };
     try {
-      const res = await axios.get(`${BASE_URL}/restaurants/1`, headers);
+      const res = await axios.get(`${BASE_URL}/restaurants/${restaurantId}`, headers);
       setRestaurant(res.data.restaurant);
     } catch (err) {
       alert(err.message);
