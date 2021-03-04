@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
+import GlobalState from "./GlobalState/GlobalState";
 
 function App() {
   return (
-    <div>
-      <h1>Future Eats</h1> 
-    </div>
+    // <GlobalState>
+      <h1>Future Eats</h1>
+    // </GlobalState>
   );
 }
 
