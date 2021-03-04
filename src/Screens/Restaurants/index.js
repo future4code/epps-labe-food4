@@ -4,7 +4,7 @@ import axios from "axios";
 import { BASE_URL } from "./../../Constants/Urls";
 import { Container } from "./styled";
 import RestaurantInfo from "./RestaurantInfo";
-import CartCard from "../../Components/CartCard";
+import MenuItemCard from "../../Components/MenuItemCard";
 
 const Restaurants = () => {
   const { restaurantId } = useParams();
@@ -75,7 +75,7 @@ const Restaurants = () => {
                 restaurant.products.map((item) => {
                   if (item.category == category) {
                     return (
-                      <CartCard
+                      <MenuItemCard
                         key={item.id}
                         img={item.photoUrl}
                         title={item.name}
