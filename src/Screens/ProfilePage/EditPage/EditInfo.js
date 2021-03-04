@@ -7,10 +7,10 @@ const EditInfo = () => {
     <div>
       <form>
         <NormalInput
-          name={"email"}
+          name={"nome"}
           label={"Nome"}
           required
-          type={"email"}
+          type={"text"}
         />
          <NormalInput
           name={"email"}

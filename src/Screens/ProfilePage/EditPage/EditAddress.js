@@ -7,35 +7,35 @@ const EditAdress = () => {
     <div>
       <form>
         <NormalInput
-          name={"email"}
+          name={"logradouro"}
           label={"Logradouro"}
           required
-          type={"email"}
+          type={"text"}
         />
          <NormalInput
-          name={"email"}
+          name={"Número"}
           label={"Número"}
           required
-          type={"email"}
+          type={"number"}
         />
          <NormalInput
-          name={"email"}
+          name={"complemento"}
           label={"Complemento"}
           placeholder={"Apto. /Bloco"}
           required
-          type={"email"}
+          type={"text"}
         />
          <NormalInput
-          name={"Cidade"}
+          name={"cidade"}
           label={"Cidade"}
           required
           type={"text"}
         />
          <NormalInput
-          name={"email"}
+          name={"estado"}
           label={"Estado"}
           required
-          type={"email"}
+          type={"text"}
         />
       </form>
       <Buttons
