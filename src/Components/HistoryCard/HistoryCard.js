@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { HistoryCardDate, HistoryCardContainer, HistoryCardRestaurant, HistoryCardPrice } from "./styled";
 
 
-const CardOrder = (props) => {
+const HistoryCard = (props) => {
   const date = new Date(props.date);
   let options = { day: "numeric", month: "long", year: "numeric" };
   const newDate = date.toLocaleDateString("pt-PT", options);
@@ -19,4 +19,4 @@ const CardOrder = (props) => {
   );
 };
 
-export default CardOrder;
+export default HistoryCard;
