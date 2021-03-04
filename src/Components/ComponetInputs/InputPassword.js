@@ -37,18 +37,20 @@ function ComponentInputs(props) {
     showPassword: false,
   });
 
+    const classes = useStyles ();
+    const [values, setValues] = React.useState({
+    password: "",
+    showPassword: false
+  });
   const handleChange = (prop) => (event) => {
     setValues({ ...values, [prop]: event.target.value });
   };
-
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
-
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
-
   return (
     <ThemeProvider theme={theme}>
       <div className={classes.root}>
@@ -59,7 +61,7 @@ function ComponentInputs(props) {
           <InputLabel htmlFor="outlined-adornment-password">
             Password
           </InputLabel>
-          <OutlinedInput
+          <OutlinedInput            
             name={props.name}
             placeholder={props.placeholder}
             id="outlined-adornment-password"
@@ -84,5 +86,6 @@ function ComponentInputs(props) {
       </div>
     </ThemeProvider>
   );
+
 }
 export default ComponentInputs;
