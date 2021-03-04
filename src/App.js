@@ -1,12 +1,11 @@
-import React from 'react';
-import LoginPage from './Screens/LoginPage/LoginPage'
+import React from "react";
+import GlobalState from "./GlobalState/GlobalState";
 
 function App() {
   return (
-    <div>
+    // <GlobalState>
       <h1>Future Eats</h1>
-      <LoginPage />
-    </div>
+    // </GlobalState>
   );
 }
 
