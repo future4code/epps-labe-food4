@@ -2,15 +2,26 @@ import React from "react";
 import { FilterField, FilterText } from "./styled";
 
 export const CategoryFilter = (props) => {
+  const restaurants = props.restaurants
+  
+  const categoryList = restaurants && restaurants.map((res) =>{
+    return res.category
+  })
+  
+  let FilteredCategoryList = categoryList && categoryList.filter(function(elem, pos, self) {
+    return self.indexOf(elem) === pos;
+  })
+
+  const renderCategory = FilteredCategoryList && FilteredCategoryList.map((category) =>{
+    return(
+      <p onClick={() => props.onClickCategory(category)} value={category} key={category}>{category}</p>
+    )
+  })
+
   return (
     <FilterField>
       <FilterText>
-        <p>Burguer</p>
-        <p>Asiática</p>
-        <p>Massas</p>
-        <p>Saudáveis</p>
-        <p>Vegetariano</p>
-        <p>Churrasco</p>
+        {renderCategory}
       </FilterText>
     </FilterField>
   );

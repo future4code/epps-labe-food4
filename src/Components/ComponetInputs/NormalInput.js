@@ -1,8 +1,8 @@
-import { TextField } from '@material-ui/core'
-import React from 'react'
+import { TextField } from "@material-ui/core";
+import React from "react";
 import { ThemeProvider } from "@material-ui/core";
-import theme from './Theme/theme';
-import {InputContainer} from './Styled'
+import theme from "./Theme/theme";
+import { InputContainer } from "./Styled";
 
 
 function NormalInput(props){

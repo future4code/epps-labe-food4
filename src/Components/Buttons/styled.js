@@ -5,10 +5,6 @@ export const ContainerBtn = styled.div`
     justify-content:center;
     width:100%;
     margin:8px 0;
-    /* width:360px;
-    height:42px;
-    margin:142px 0 16px;
-    padding: 0 16px; */
 `
 
 export const Btn = styled.button`

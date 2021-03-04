@@ -4,21 +4,17 @@ export const Card = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
   height: 120px;
   width: 360px;
   margin: 8px 0 0;
   padding: 8px 16px 0 0;
-
   #Retangle {
     width: 328px;
     height: 112px;
     border-radius: 8px;
     border: 1px solid var(--greyish);
-
     display: flex;
   }
-
   #Image {
     img {
       width: 96px;
@@ -27,14 +23,11 @@ export const Card = styled.div`
       object-fit: contain;
     }
   }
-
   #Content {
     display: flex;
     flex-direction: column;
-
     position: relative;
     box-sizing:content-box;
-
     #Header {
       #Title {
         width: 167px;
@@ -49,7 +42,6 @@ export const Card = styled.div`
         letter-spacing: -0.39px;
         color: var(--mid-green);
       }
-
       #Quantity {
         width: 33px;
         height: 33px;
@@ -58,13 +50,11 @@ export const Card = styled.div`
         border-radius: 0 8px 0 8px;
         border: 1px solid var(--mid-green);
         color: var(--mid-green);
-
         position: absolute;
         top: 0;
         right: 1px;
       }
     }
-
     #Main {
       width: 200px;
       height: 30px;
@@ -78,7 +68,6 @@ export const Card = styled.div`
       letter-spacing: -0.29px;
       color: var(--greyish);
     }
-
     #Footer {
       #price {
         width: 118px;
@@ -93,7 +82,6 @@ export const Card = styled.div`
         letter-spacing: -0.39px;
         color: #000000;
       }
-
       #remove-btn {
         width: 90px;
         height: 31px;
@@ -103,7 +91,6 @@ export const Card = styled.div`
         border: 1px solid #e02020;
         background: transparent;
         color: #e02020;
-
         position: absolute;
         bottom: 0;
         right: 1px;

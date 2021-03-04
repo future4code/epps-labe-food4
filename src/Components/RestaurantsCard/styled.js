@@ -15,12 +15,19 @@ export const ResCard = styled.div`
     padding: 0 0 16px;
     border-radius: 8px;
     border: solid 1px var(--greyish);
+
+    img{
+      width: 328px;
+      height: 120px;
+      margin: 0 0 12px;
+      object-fit: contain;
+    }
   }
 
   #Restaurant {
     width: 296px;
     height: 18px;
-    margin: 12px 16px 0;
+    margin: 0 16px 0;
     font-family: Roboto;
     font-size: 16px;
     font-weight: normal;
@@ -34,11 +41,11 @@ export const ResCard = styled.div`
 
 export const Info = styled.div`
   display: flex;
-  #Delivery {
+  #Delivery-Time {
     width: 148px;
     height: 18px;
     margin: 4px 8px 0 16px;
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -52,7 +59,7 @@ export const Info = styled.div`
     width: 140px;
     height: 18px;
     margin: 4px 16px 0 8px;
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
