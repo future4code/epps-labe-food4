@@ -15,7 +15,7 @@ export const HistoryOrderTitle = styled.h2`
 `;
 
 export const HistoryCardContainer = styled.div`
-  width: 328px;
+  width: 100%;
   height: 102px;
   margin: 7px 0 0;
   padding: 16px;
