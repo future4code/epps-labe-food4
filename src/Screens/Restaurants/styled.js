@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import RestaurantInfo from "./RestaurantInfo";
 
 export const Container = styled.div`
   display: flex;
