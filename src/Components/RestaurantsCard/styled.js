@@ -45,7 +45,7 @@ export const Info = styled.div`
     width: 148px;
     height: 18px;
     margin: 4px 8px 0 16px;
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -59,7 +59,7 @@ export const Info = styled.div`
     width: 140px;
     height: 18px;
     margin: 4px 16px 0 8px;
-    font-family: Roboto;
+    font-family: 'Roboto';
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
