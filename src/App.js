@@ -1,10 +1,11 @@
 import React from "react";
 import GlobalState from "./GlobalState/GlobalState";
+import Router from "./Routes/Router";
 
 function App() {
   return (
     // <GlobalState>
-      <h1>Future Eats</h1>
+      <Router />
     // </GlobalState>
 
   );

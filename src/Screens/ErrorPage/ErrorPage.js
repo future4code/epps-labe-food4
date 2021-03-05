@@ -1,14 +1,14 @@
 import { Button } from '@material-ui/core';
 import React from 'react';
 import { useHistory } from 'react-router-dom'
-import { goToRestaurants } from '../../Routes/Coordinator';
+import { goToFeed } from '../../Routes/Coordinator';
 
 function ErrorPage() {
 
     const history = useHistory()
 
     const goToPage = () =>{
-        goToRestaurants(history)
+        goToFeed(history)
     }
     return (
         <div>
