@@ -34,3 +34,18 @@ export const placeOrder = (body, id) => {
       console.log(error.response);
     });
 };
+
+export const getActiveOrder = (setOrder) => {
+  axios
+    .get(`${BASE_URL}/activer-order`, {
+      headers: {
+        auth: localStorage.getItem("token"),
+      },
+    })
+    .then((response) => {
+      setOrder(response.data.order);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
