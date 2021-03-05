@@ -6,6 +6,7 @@ function App() {
     // <GlobalState>
       <h1>Future Eats</h1>
     // </GlobalState>
+
   );
 }
 
