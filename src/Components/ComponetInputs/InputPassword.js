@@ -1,4 +1,5 @@
 import React from "react";
+import {VisibleDiv, P} from './Styled'
 import { ThemeProvider } from "@material-ui/core";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -12,13 +13,18 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import theme from "./Theme/theme";
 
 function ComponentInputs(props) {
+
+  const verificar = props.errorPassword
+
+  console.log('verificar', verificar)
+
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
       flexWrap: "wrap",
       justifyContent: "center",
       alignItems: "center",
-      height: "72px",
+      minHeight: "72px",
     },
     margin: {
       margin: "8px 0",
@@ -37,14 +43,6 @@ function ComponentInputs(props) {
     showPassword: false,
   });
 
-    const classes = useStyles ();
-    const [values, setValues] = React.useState({
-    password: "",
-    showPassword: false
-  });
-  const handleChange = (prop) => (event) => {
-    setValues({ ...values, [prop]: event.target.value });
-  };
   const handleClickShowPassword = () => {
     setValues({ ...values, showPassword: !values.showPassword });
   };
@@ -59,9 +57,10 @@ function ComponentInputs(props) {
           variant="outlined"
         >
           <InputLabel htmlFor="outlined-adornment-password">
-            Password
+            Password*
           </InputLabel>
-          <OutlinedInput            
+          <OutlinedInput    
+            error={props.errorPassword}        
             name={props.name}
             placeholder={props.placeholder}
             id="outlined-adornment-password"
@@ -82,6 +81,7 @@ function ComponentInputs(props) {
             }
             labelWidth={70}
           />
+          <VisibleDiv errorPassword={props.errorPassword} visible={'none'}><P>Deve ser a mesma que a anterior</P></VisibleDiv>
         </FormControl>
       </div>
     </ThemeProvider>
