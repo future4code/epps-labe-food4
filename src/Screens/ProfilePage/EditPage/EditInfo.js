@@ -1,39 +1,81 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { goToProfile } from "../../../Routes/Coordinator";
 import NormalInput from "../../../Components/ComponetInputs/NormalInput";
-import Buttons from "../../../Components/Buttons/index"
+import Buttons from "../../../Components/Buttons/index";
+import { BASE_URL } from "../../../Constants/Urls";
+import useRequestData from "../../../Hooks/useRequestData";
+import useForm from "../../../Hooks/useForm";
+import axios from "axios";
+import { cpfMask } from "../../RegisterPage/Mask";
 
 const EditInfo = () => {
+  const history = useHistory();
+  const [form, onChange, clearFields, setValues] = useForm({
+    name: "",
+    email: "",
+    cpf: "",
+  });
+  const formatedCPF = cpfMask(form.cpf);
+
+  const axiosConfig = {
+    headers: { auth: window.localStorage.getItem("token") },
+  };
+
+  const editInfos = (body) => {
+    axios
+      .put(`${BASE_URL}/profile`, body, axiosConfig)
+      .then((response) => {
+        window.alert("Cadastro atualizado!");
+        goToProfile(history);
+      })
+      .catch((error) => {
+        window.alert("Algo deu errado, tente novamente!");
+      });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    editInfos(form);
+    clearFields();
+  };
+
+  const userData = useRequestData(`${BASE_URL}/profile`, undefined);
+
+  useEffect(() => {
+    userData && setValues(userData.user);
+  }, [userData]);
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <NormalInput
-          name={"nome"}
-          label={"Nome"}
+          name="name"
+          label="Nome"
           required
-          type={"text"}
+          type="text"
+          value={form.name}
+          onChange={onChange}
         />
-         <NormalInput
-          name={"email"}
-          label={"E-mail"}
+        <NormalInput
+          name="email"
+          label="E-mail"
           required
-          type={"email"}
+          type="email"
+          value={form.email}
+          onChange={onChange}
         />
-         <NormalInput
-          name={"cpf"}
-          label={"CPF"}
-          placeholder={"000.000.000-00"}
-          pattern="[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}"
+        <NormalInput
+          name="cpf"
+          label="CPF"
+          placeholder="000.000.000-00"
           required
-          type={"email"}
+          type="text"
+          value={formatedCPF}
+          onChange={onChange}
         />
+        <Buttons text={"Salvar"} type={"submit"}></Buttons>
       </form>
-      <Buttons
-        text={'Salvar'}
-        type={'Submit'}
-      >
-
-     </Buttons>
-
     </div>
   );
 };
