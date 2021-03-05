@@ -56,7 +56,7 @@ const LoginForm = () => {
             value={form.email}
             onChange={onChange}
             placeholder={"email@email.com"}
-            label={"E-mail"}
+            label={"E-mail*"}
             required
             type={"email"}
           />
@@ -65,7 +65,7 @@ const LoginForm = () => {
             value={form.password}
             onChange={onChange}
             placeholder={"Mínimo de 6 caracteres"}
-            label={"Senha"}
+            label={"Senha*"}
             required
             type={"password"}
           />

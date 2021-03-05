@@ -40,7 +40,7 @@ const AdressForm = () =>{
                     placeholder={'Rua/ Av.'}
                     value={form.street}
                     onChange={onChange}
-                    label={'Logradouro'}
+                    label={'Logradouro*'}
                     required
                     type={'Name'}                    
                 />
@@ -49,7 +49,7 @@ const AdressForm = () =>{
                     placeholder={'Número'}
                     value={form.number}
                     onChange={onChange}
-                    label={'Número'}
+                    label={'Número*'}
                     required
                     type={'number'}                    
                 />
@@ -67,7 +67,7 @@ const AdressForm = () =>{
                     placeholder={'Bairro'}
                     value={form.neighbourhood}
                     onChange={onChange}
-                    label={'Bairro'}
+                    label={'Bairro*'}
                     required
                     type={'text'}                    
                 />
@@ -76,7 +76,7 @@ const AdressForm = () =>{
                     placeholder={'Cidade'}
                     value={form.city}
                     onChange={onChange}
-                    label={'Cidade'}
+                    label={'Cidade*'}
                     required
                     type={'text'}                    
                 />
@@ -85,7 +85,7 @@ const AdressForm = () =>{
                     placeholder={'Estado'}
                     value={form.state}
                     onChange={onChange}
-                    label={'Estado'}
+                    label={'Estado*'}
                     required
                     type={'text'}                    
                 />

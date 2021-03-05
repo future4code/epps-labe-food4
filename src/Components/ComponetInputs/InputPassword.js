@@ -57,7 +57,7 @@ function ComponentInputs(props) {
           variant="outlined"
         >
           <InputLabel htmlFor="outlined-adornment-password">
-            Password*
+            {props.label}
           </InputLabel>
           <OutlinedInput    
             error={props.errorPassword}        
