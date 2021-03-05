@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
 import InputPassoword from '../../Components/ComponetInputs/InputPassword'
 import NormalInput from '../../Components/ComponetInputs/NormalInput'
@@ -8,6 +8,7 @@ import useForm from '../../Hooks/useForm'
 const RegisterForm = () => {
 
     const [form, onChange, clearFields] = useForm({name:'', email:'', cpf:'', password:'', confirmPassword:''})
+    const [errorPassword, setErrorPassword] = useState()
 
     const onSubmitForm =(event)=>{
         event.preventDefault()
@@ -31,9 +32,11 @@ const RegisterForm = () => {
         const secondPassword = form.confirmPassword
       
         if( firstPassword === secondPassword) {
+            setErrorPassword(false)
             registerUser(form, /* history */)
         } else {
-            alert ("Confirme sua senha!")
+            /* alert ("Confirme sua senha!") */
+            setErrorPassword(true)
         } 
     }
     return(
@@ -87,11 +90,12 @@ const RegisterForm = () => {
                     required
                     type={'password'}
                     confirmPassword={validatePassword}
+                    errorPassword={errorPassword}
                     
                 />
                 <Buttons
                     text={'Criar'}
-                    type={'subit'}
+                    type={'subimit'}
                 >
                     
                 </Buttons>
