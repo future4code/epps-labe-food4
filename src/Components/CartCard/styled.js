@@ -7,8 +7,8 @@ export const Card = styled.div`
   height: 120px;
   width: 360px;
   margin: 8px 0 0;
-  padding: 8px 16px 0 0;
-  #Retangle {
+  padding: 8px 16px 0;
+  #Rectangle {
     width: 328px;
     height: 112px;
     border-radius: 8px;
@@ -16,18 +16,22 @@ export const Card = styled.div`
     display: flex;
   }
   #Image {
+    width: 96px;
+    height: 112px;
+    margin: 0 16px 0 0;
+    overflow: hidden;
     img {
-      width: 96px;
-      height: 112px;
-      margin: 0 16px 0 0;
+      height: 100%;
+      border-radius: 8px 0 0 8px;
       object-fit: contain;
+      margin-left: -30px;
     }
   }
   #Content {
     display: flex;
     flex-direction: column;
     position: relative;
-    box-sizing:content-box;
+    box-sizing: content-box;
     #Header {
       #Title {
         width: 167px;

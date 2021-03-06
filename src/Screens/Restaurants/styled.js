@@ -5,7 +5,6 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: fit-content;
 
   #menu-section {
     hr {
@@ -34,6 +33,7 @@ export const Container = styled.div`
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
+  cursor: default;
   #image {
     display: flex;
     align-items: center;

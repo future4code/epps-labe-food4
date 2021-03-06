@@ -2,7 +2,7 @@ import React from "react";
 import NormalInput from "../../../Components/ComponetInputs/NormalInput";
 import Buttons from "../../../Components/Buttons/index"
 
-const EditAdress = () => {
+const EditAddress = () => {
   return (
     <div>
       <form>
@@ -49,4 +49,4 @@ const EditAdress = () => {
   );
 };
 
-export default EditAdress;
+export default EditAddress;

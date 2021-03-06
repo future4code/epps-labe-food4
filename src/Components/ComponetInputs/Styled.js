@@ -17,8 +17,8 @@ export const VisibleDiv = styled.div`
 `
 
 export const P = styled.p`
-    margin: 8px 0 0 15px;
+    margin: 5px 119px 0 16px;
     color: red;
     text-align: start;
-    font-size: 15px;
+    font-size: 12px;
 `

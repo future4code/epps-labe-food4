@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const FilterField = styled.div`
-  width: 100vw;
-  max-width: 100%;
+  width: 360px;
+  max-width: 360px;
   padding: 12px 0 12px 16px;
   display: flex;
   flex-direction: wrap;
@@ -17,13 +17,14 @@ export const FilterField = styled.div`
 `;
 
 export const FilterText = styled.div`
-  width: 100vw;
+  width: 360px;
   max-width: 420px;
   height: 15px;
   display: flex;
+  justify-content: flex-start;
   flex-direction: wrap;
   :first-child {
-    margin-left: 18px;
+    /* margin-left: 18px; */
   }
 
   p {

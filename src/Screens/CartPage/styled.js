@@ -1,12 +1,44 @@
 import styled from "styled-components";
 
-export const CartContainer = styled.div`
-  width: 100vw;
-  max-width: 420px;
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `;
 
-export const AdressContainer = styled.div`
-  width: 100vw;
+export const RestaurantContainer = styled.div`
+  p {
+    font-family: "Roboto";
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: -0.39px;
+  }
+  #rest-title {
+    width: 328px;
+    height: 18px;
+    margin: 16px 16px 8px;
+    color: var(--mid-green);
+  }
+  #rest-address, #rest-deliveryTime {
+    width: 328px;
+    height: 18px;
+    margin: 8px 16px;
+    color: var(--greyish);
+  }
+`;
+
+export const CartContainer = styled.div`
+  width: 360px;
+  max-width: 420px;
+  height: calc(100vh - 49px);
+`;
+
+export const AddressContainer = styled.div`
+  width: 360px;
   max-width: 420px;
   height: 76px;
   margin: 1px 0 8px;
@@ -14,8 +46,8 @@ export const AdressContainer = styled.div`
   background-color: #eeeeee;
 `;
 
-export const AdressDelivery = styled.p`
-  width: 100vw;
+export const AddressDelivery = styled.p`
+  width: 360px;
   max-width: 420px;
   height: 18px;
   margin: 0 0 8px;
@@ -25,7 +57,7 @@ export const AdressDelivery = styled.p`
 `;
 
 export const Title = styled.p`
-  width: 100vw;
+  width: 360px;
   max-width: 420px;
   height: 42px;
   margin: 18px 0 33px;
@@ -55,7 +87,7 @@ export const TotalPrice = styled.p`
 `;
 
 export const PaymentMethodText = styled.p`
-  width: 100vw;
+  width: 360px;
   max-width: 420px;
   height: 18px;
   margin: 24px 16px 8px;

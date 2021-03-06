@@ -4,7 +4,7 @@ import { Card } from "./styled";
 const CartCard = (props) => {
   return (
     <Card>
-      <div id="Retangle">
+      <div id="Rectangle">
         <div id="Image">
           <img src={props.img} />
         </div>
@@ -19,11 +19,8 @@ const CartCard = (props) => {
             <p>{props.description}</p>
           </div>
           <div id="Footer">
-            <p>R${props.price}.00</p>
-            <button
-              id="remove-btn"
-              onClick={() => props.removeItemFromCart(props.id)}
-            >
+            <p>R${props.price}</p>
+            <button id="remove-btn" >
               remover
             </button>
           </div>

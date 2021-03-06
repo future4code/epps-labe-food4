@@ -5,6 +5,7 @@ export const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  
 `;
 
 export const TextFieldSearch = styled(TextField)`

@@ -10,6 +10,10 @@ background-color: #ffffff;
 display: flex;
 justify-content: space-around;
 
+position: sticky;
+bottom: 0;
+transition: all 0.3s ease-in-out;
+
 .icon{
     width: 27px;
     height: 27px;

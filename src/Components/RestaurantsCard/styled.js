@@ -8,6 +8,7 @@ export const ResCard = styled.div`
   height:196px;
   margin:8px 0 0;
   padding:8px 16px 0;
+  cursor: pointer;
 
   #Rectangle {
     width: 329px;

@@ -1,11 +1,17 @@
 import styled from 'styled-components'
 
-export const TitleAdress = styled.div`
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const TitleAddress = styled.div`
     width: 360px;
     height: 42px;
     margin: 16px 0 0;
-    padding: 12px 32px;
-    
+    padding: 12px 32px;  
 
     p {
     width: 296px;
@@ -22,3 +28,10 @@ export const TitleAdress = styled.div`
     margin: 0;
   }
 `
+
+export const LogoImgRegister = styled.img`
+  width: 104px;
+  height: 58px;
+  margin: 24px 128px 16px;
+  object-fit: contain;
+`;

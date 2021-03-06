@@ -1,11 +1,17 @@
 import styled from 'styled-components'
 
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
+
 export const TitleEnter = styled.div`
     width: 360px;
     height: 42px;
     margin: 16px 0 0;
-    padding: 12px 32px;
-    
+    padding: 12px 32px; 
 
     p {
     width: 296px;

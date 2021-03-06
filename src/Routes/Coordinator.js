@@ -1,31 +1,39 @@
-export const goToBack = (history) =>{
-    history.goBack()
-}
+export const goToBack = (history) => {
+  history.goBack();
+};
 
-export const goToFeed = (history) =>{
-    history.push('/feed')
-}
+export const goToHome = (history) => {
+  history.push("/");
+};
 
-export const goToRegister = (history) =>{
-    history.push('/register')
-}
+export const goToFeed = (history) => {
+  history.push("/feed");
+};
 
-export const goToAddressPage = (history) =>{
-    history.push('/address-Page')
-}
+export const goToRegister = (history) => {
+  history.push("/register");
+};
 
-export const goToRestaurantsInfos = (history) =>{
-    history.push('/restaurants-infos')
-}
+export const goToAddressPage = (history) => {
+  history.push("/address");
+};
 
-export const goToProfile = (history) =>{
-    history.push('/profile')
-}
+export const goToRestaurant = (history, id) => {
+  history.push(`/restaurant/${id}`);
+};
 
-export const goToProfileAddress = (history) =>{
-    history.push('/edit-profile-address')
-}
+export const goToProfile = (history) => {
+  history.push("/profile");
+};
 
-export const goToProfileInfo = (history) =>{
-    history.push('/edit-profile-info')
-}
+export const goToCart = (history) => {
+  history.push("/cart");
+};
+
+export const goToProfileAddress = (history) => {
+  history.push("/edit-profile-address");
+};
+
+export const goToProfileInfo = (history) => {
+  history.push("/edit-profile-info");
+};

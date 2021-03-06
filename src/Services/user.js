@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../Constants/Urls";
 
-export const getUserAdress = (setUserAdress) => {
+export const getUserAddress = (setUserAddress) => {
   axios
     .get(`${BASE_URL}/profile/address`, {
       headers: {
@@ -9,10 +9,10 @@ export const getUserAdress = (setUserAdress) => {
       },
     })
     .then((response) => {
-      setUserAdress(response.data.address);
+      setUserAddress(response.data.address);
     })
     .catch((error) => {
-      console.log(error.response);
+      alert(error.response);
     });
 };
 
@@ -31,6 +31,6 @@ export const placeOrder = (body, id) => {
       if (errorArray[errorArray.length - 1] === "409") {
         alert("Você já tem um pedido em andamento");
       }
-      console.log(error.response);
+      alert(error.response);
     });
 };

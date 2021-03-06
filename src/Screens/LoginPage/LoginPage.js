@@ -1,24 +1,38 @@
-import React from 'react'
-import LoginForm from './LoginForm'
-import Logo from '../../Imgs/logo-future-eats-invert.png'
-import { LogoImg, TitleEnter, TitleRegister } from './styled'
-import { useHistory } from 'react-router'
-import { goToRegister, goToFeed } from '../../Routes/Coordinator'
+import React, { useState } from "react";
+import LoginForm from "./LoginForm";
+import Logo from "../../Imgs/logo-future-eats-invert.png";
+import { Wrapper, LogoImg, TitleEnter, TitleRegister } from "./styled";
+import { useHistory, Link } from "react-router-dom";
+import { goToFeed } from "../../Routes/Coordinator";
+import InitialLoadingPage from "../InitialLoadingPage/InitialLoadingPage";
 
-const LoginPage = () =>{
-     const history = useHistory()
-    return(
-        <div>
-            <LogoImg src={Logo} />
-            <TitleEnter>
-                <p onClick={() => goToFeed(history)}>Entrar</p>
-            </TitleEnter>
-            <LoginForm/>
-            <TitleRegister>
-                <p onClick={() => goToRegister(history)}>Não possui cadastro? Clique aqui.</p>
-            </TitleRegister>
-        </div>
-    )
-}
+const LoginPage = () => {
+  const history = useHistory();
+  const [loading, setLoading] = useState(true);
 
-export default LoginPage
+  return (
+    <div>
+      {loading ? (
+        <InitialLoadingPage setLoading={setLoading} />
+      ) : (
+        <Wrapper>
+          <LogoImg src={Logo} />
+          <TitleEnter>
+            <p onClick={() => goToFeed(history)}>Entrar</p>
+          </TitleEnter>
+          <LoginForm />
+          <TitleRegister>
+            <p>
+              Não possui cadastro?{" "}
+              <Link to="/register">
+                <b>Clique aqui.</b>
+              </Link>
+            </p>
+          </TitleRegister>
+        </Wrapper>
+      )}
+    </div>
+  );
+};
+
+export default LoginPage;

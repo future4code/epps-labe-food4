@@ -16,8 +16,6 @@ function ComponentInputs(props) {
 
   const verificar = props.errorPassword
 
-  console.log('verificar', verificar)
-
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",
@@ -57,7 +55,7 @@ function ComponentInputs(props) {
           variant="outlined"
         >
           <InputLabel htmlFor="outlined-adornment-password">
-            Password*
+            {props.label}
           </InputLabel>
           <OutlinedInput    
             error={props.errorPassword}        

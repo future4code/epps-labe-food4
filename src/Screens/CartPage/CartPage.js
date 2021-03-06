@@ -7,8 +7,10 @@ import {
   RadioGroup,
 } from "@material-ui/core";
 import {
-  AdressDelivery,
-  AdressContainer,
+  Wrapper,
+  AddressDelivery,
+  AddressContainer,
+  RestaurantContainer,
   CartContainer,
   ShippingText,
   SubtotalPrice,
@@ -18,16 +20,17 @@ import {
   Title,
 } from "./styled";
 import Buttons from "../../Components/Buttons";
-import { getUserAdress, placeOrder } from "../../Services/user";
+import Footer from "../../Components/Footer/index";
+import { getUserAddress, placeOrder } from "../../Services/user";
 import GlobalStateContext from "../../GlobalState/GlobalStateContext";
 
 export const CartPage = () => {
   const { states, setters } = useContext(GlobalStateContext);
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [userAdress, setUserAdress] = useState(undefined);
+  const [userAddress, setUserAddress] = useState(undefined);
 
   useEffect(() => {
-    getUserAdress(setUserAdress);
+    getUserAddress(setUserAddress);
   }, []);
 
   const onChangePay = (event) => {
@@ -37,30 +40,37 @@ export const CartPage = () => {
   const sendOrder = () => {
     if (!paymentMethod) {
       alert("Selecione um método de pagamento.");
-    } else if (Object.entries(states.cart).length !== 0) {
-      const productsArray = states.cart.products
-        .filter((item) => {
-          return item.quantity > 0;
-        })
-        .map((product) => {
-          return {
-            id: product.id,
-            quantity: product.quantity,
-          };
-        });
+    }
+    else if (states.cart.length > 0) {
+      const productsArray = states.cart[0].order.map((item) => {
+        return { id: item.id, quantity: item.quantity };
+      });
+      // .map((product) => {
+      //   return {
+      //     id: product.id,
+      //     quantity: product.quantity,
+      //   };
+      // });
 
       const body = {
         products: productsArray,
         paymentMethod: paymentMethod,
       };
-      placeOrder(body, states.cart.id);
+      console.log(body);
+      // placeOrder(body, states.cart.id);
     } else {
       alert("Escolha um produto!");
     }
   };
 
+  const teste = () => {
+    if (!paymentMethod) {
+      alert("Selecione um método de pagamento.");
+    }
+  }
+
   const removeItemFromCart = (id) => {
-    const newProducts = states.cart.products.map((product) => {
+    const newProducts = states.cart[0].order.map((product) => {
       if (product.id === id) {
         const newQuantity = product.quantity - 1;
         const completeProduct = {
@@ -78,29 +88,42 @@ export const CartPage = () => {
 
   const subTotal = () => {
     let number = 0;
-    if (Object.entries(states.cart).length !== 0) {
-      states.cart.products.forEach((item) => {
+    if (Object.entries(states.cart).length > 0) {
+      states.cart[0].order.forEach((item) => {
         number += item.price * item.quantity;
       });
-      return states.cart.shipping + number;
+      return (states.cart[0].shipping + number).toFixed(2);
     }
-    return 0;
   };
 
-  return (
-    <CartContainer>
-      <AdressContainer>
-        <AdressDelivery>Endereço de entrega</AdressDelivery>
-        {userAdress ? (
-          <p>{`${userAdress.street}, ${userAdress.number}`}</p>
-        ) : (
-          <p>Buscando endereço...</p>
-        )}
-      </AdressContainer>
+  console.log(states.cart)
 
-      {Object.entries(states.cart).length !== 0 ? (
-        states.cart.products.map((product) => {
-          if (product.quantity > 0) {
+  return (
+    <Wrapper>
+      <CartContainer>
+        <AddressContainer>
+          <AddressDelivery>Endereço de entrega</AddressDelivery>
+          {userAddress ? (
+            <p>{`${userAddress.street}, ${userAddress.number}`}</p>
+          ) : (
+            <p>Buscando endereço...</p>
+          )}
+        </AddressContainer>
+
+        <RestaurantContainer>
+          <p id="rest-title">
+            {states.cart.length > 0 && states.cart[0].restaurant}
+          </p>
+          <p id="rest-address">
+            {states.cart.length > 0 && states.cart[0].address}
+          </p>
+          <p id="rest-deliveryTime">
+            {states.cart.length > 0 && states.cart[0].deliveryTime}
+          </p>
+        </RestaurantContainer>
+
+        {states.cart.length > 0 ? (
+          states.cart[0].order.map((product) => {
             return (
               <CartCard
                 id={product.id}
@@ -109,43 +132,45 @@ export const CartPage = () => {
                 name={product.name}
                 description={product.description}
                 price={product.price}
-                removeItem={removeItemFromCart}
               />
             );
-          }
-        })
-      ) : (
-        <Title>Carrinho vazio</Title>
-      )}
+          })
+        ) : (
+          <Title>Carrinho vazio</Title>
+        )}
 
-      <ShippingText>Frete R${states.cart.shipping}.00</ShippingText>
-      <SubtotalPrice>
-        <p>SUBTOTAL</p>
-        <TotalPrice>R${subTotal()}.00</TotalPrice>
-      </SubtotalPrice>
+        <ShippingText>
+          Frete R${states.cart.length > 0 && states.cart[0].shipping.toFixed(2)}
+        </ShippingText>
+        <SubtotalPrice>
+          <p>SUBTOTAL</p>
+          <TotalPrice>R${subTotal()}</TotalPrice>
+        </SubtotalPrice>
 
-      <PaymentMethodText>Forma de pagamento</PaymentMethodText>
-      <CheckBox>
-        <FormControl component="fieldset" required={true}>
-          <RadioGroup
-            name="paymentMethod"
-            value={paymentMethod}
-            onChange={onChangePay}
-          >
-            <FormControlLabel
-              value="money"
-              control={<Radio color="var(--mid-green)" />}
-              label="Dinheiro"
-            />
-            <FormControlLabel
-              value="creditcard"
-              control={<Radio color="var(--mid-green)" />}
-              label="Cartão de crédito"
-            />
-          </RadioGroup>
-        </FormControl>
-      </CheckBox>
-      <Buttons text="CONFIRMAR" onClick={sendOrder}></Buttons>
-    </CartContainer>
+        <PaymentMethodText>Forma de pagamento</PaymentMethodText>
+        <CheckBox>
+          <FormControl component="fieldset" required={true}>
+            <RadioGroup
+              name="paymentMethod"
+              value={paymentMethod}
+              onChange={onChangePay}
+            >
+              <FormControlLabel
+                value="money"
+                control={<Radio color="var(--mid-green)" />}
+                label="Dinheiro"
+              />
+              <FormControlLabel
+                value="creditcard"
+                control={<Radio color="var(--mid-green)" />}
+                label="Cartão de crédito"
+              />
+            </RadioGroup>
+          </FormControl>
+        </CheckBox>
+        <Buttons text="CONFIRMAR" onClick={teste}></Buttons>
+      </CartContainer>
+      <Footer />
+    </Wrapper>
   );
 };

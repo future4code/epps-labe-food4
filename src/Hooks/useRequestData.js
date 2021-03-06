@@ -8,7 +8,7 @@ useEffect(()=>{
     axios.get(url,{headers:{auth:localStorage.getItem("token")}}).then(response =>{
         setData(response.data)
     }).catch(error =>{
-        console.log(error)
+        alert(error)
     })
 },[url])
 return data
