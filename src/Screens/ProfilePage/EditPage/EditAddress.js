@@ -1,52 +1,107 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
+import { goToProfile } from "../../../Routes/Coordinator";
 import NormalInput from "../../../Components/ComponetInputs/NormalInput";
-import Buttons from "../../../Components/Buttons/index"
+import Buttons from "../../../Components/Buttons/index";
+import { BASE_URL } from "../../../Constants/Urls";
+import useForm from "../../../Hooks/useForm";
+import useRequestData from "../../../Hooks/useRequestData";
+import axios from "axios";
 
-const EditAdress = () => {
+const EditAdressPage = () => {
+  const history = useHistory();
+  const [form, onChange, clearFields, setValues] = useForm({
+    street: "",
+    number: "",
+    neighbourhood: "",
+    city: "",
+    state: "",
+    complement: "",
+  }); 
+
+  const axiosConfig = {
+    headers: { auth: window.localStorage.getItem("token") },
+  };
+
+  const addAdress = (body) => {
+    axios
+      .put(`${BASE_URL}/address`, body, axiosConfig)
+      .then((res) => {
+        localStorage.setItem("token", res.data.token);
+        window.alert("Endereço atualizado com sucesso!");
+        goToProfile(history)
+      })
+      .catch((error) => {
+        window.alert("Algo deu errado!");
+      });
+  };
+
+  const getAllAddress = useRequestData(
+    `${BASE_URL}/profile/address`,
+    undefined
+  );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    clearFields();
+    addAdress(form);
+  };
+
+  useEffect(() => {
+    getAllAddress && setValues(getAllAddress.address);
+  }, [getAllAddress]);
+
   return (
     <div>
-      <form>
+      <form onSubmit={handleSubmit}>
         <NormalInput
-          name={"logradouro"}
-          label={"Logradouro"}
-          required
-          type={"text"}
+          label="Logradouro*"
+          placeholder="Rua/Av."
+          name="street"
+          value={form.street}
+          onChange={onChange}
         />
-         <NormalInput
-          name={"Número"}
-          label={"Número"}
-          required
-          type={"number"}
+        <NormalInput
+          label="Número*"
+          placeholder="Número"
+          name="number"
+          value={form.number}
+          onChange={onChange}
+          type="number"
         />
-         <NormalInput
-          name={"complemento"}
-          label={"Complemento"}
-          placeholder={"Apto. /Bloco"}
-          required
-          type={"text"}
+        <NormalInput
+          label="Complemento"
+          placeholder="Apto. /Bloco"
+          name="complement"
+          value={form.complement}
+          onChange={onChange}
         />
-         <NormalInput
-          name={"cidade"}
-          label={"Cidade"}
-          required
-          type={"text"}
+        <NormalInput
+          label="Bairro*"
+          placeholder="Bairro"
+          name="neighbourhood"
+          value={form.neighbourhood}
+          onChange={onChange}
         />
-         <NormalInput
-          name={"estado"}
-          label={"Estado"}
-          required
-          type={"text"}
+        <NormalInput
+          label="Cidade*"
+          placeholder="Cidade"
+          name="city"
+          value={form.city}
+          onChange={onChange}
         />
+        <NormalInput
+          label="Estado*"
+          placeholder="Estado"
+          name="state"
+          value={form.state}
+          onChange={onChange}
+        />
+
+        <Buttons text={"Salvar"} type={"Submit"}></Buttons>
       </form>
-      <Buttons
-        text={'Salvar'}
-        type={'Submit'}
-      >
-
-     </Buttons>
-
     </div>
   );
 };
 
-export default EditAdress;
+export default EditAdressPage;
