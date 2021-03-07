@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 `;
 
 export const InitialLoadingPageContainer = styled.div`
-  width: 100vw;
+  width: 360px;
   height: 100vh;
   max-width: 420px;
   display: flex;
