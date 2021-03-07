@@ -1,24 +1,26 @@
 import React, { useEffect } from "react";
 import Loading from "../../Components/Loading/Loading";
 import logo from "../../Imgs/logo-future-eats.png"
-import { InitialLoadingPageContainer, LoadingContainer, Logo } from "./styled";
+import { InitialLoadingPageContainer, LoadingContainer, Logo, Wrapper } from "./styled";
 
-const InitialLoadingPage = () => {
+const InitialLoadingPage = (props) => {
 
     useEffect(() => {
         setTimeout(() => {
-        //   goToHome(history)
-        }, 5000)
+        props.setLoading(false)
+        }, 1000)
       }, [])
 
     return (
+      <Wrapper>
         <InitialLoadingPageContainer>
-            <Logo src={logo} />
-            <LoadingContainer>
-                <Loading />
-            </LoadingContainer>
+          <Logo src={logo} />
+          <LoadingContainer>
+            {/* <Loading /> */}
+          </LoadingContainer>
         </InitialLoadingPageContainer>
-    )
+      </Wrapper>
+    );
 }
 
 export default InitialLoadingPage
