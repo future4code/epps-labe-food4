@@ -95,6 +95,7 @@ const CartPage = () => {
   };
 
   const deliveryTime = states.cart.legngth > 0 && deliveryText(states.cart[0]);
+
   return (
     <>
       <Header title="Carrinho" arrow="true" />
@@ -116,6 +117,7 @@ const CartPage = () => {
             {states.cart.length > 0 && states.cart[0].address}
           </RestaurantAddress>
           <RestaurantDelivery>{deliveryTime}</RestaurantDelivery>
+
         </RestaurantContainer>
 
         {states.cart.length > 0 ? (

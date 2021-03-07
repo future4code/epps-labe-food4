@@ -14,7 +14,7 @@ import {
   SubTotalText,
 } from "./styled";
 import { useProtectedPage } from "./../../Hooks/useProtectedPage";
-import { goToRestaurant } from "../../Routes/Coordinator";
+import { goToRestaurant, goToSearchPage } from "../../Routes/Coordinator";
 import { useHistory } from "react-router-dom";
 import { getActiveOrder } from "../../Services/user";
 import Header from "../../Components/Header";
@@ -67,9 +67,9 @@ function FeedPage() {
             return restaurant.category.includes(category);
           }
         })
-        .filter((restaurant) =>
+        /* .filter((restaurant) =>
           restaurant.name.toLowerCase().includes(inputName.toLowerCase())
-        );
+        ); */
 
     return list;
   };
@@ -93,21 +93,27 @@ function FeedPage() {
   //capturando o value da categoria clicada e chamando a função que filtra os restaurantes
   const onClickCategory = (categoryValue) => {
     setCategory(categoryValue);
-    filterList(categoryValue, inputName);
+    filterList(categoryValue/* , inputName */);
   };
 
   //capturando o value do input e chamando a função que filtra os restaurantes
-  const onChangeName = (e) => {
+  /* const onChangeName = (e) => {
     setInputName(e.target.value);
     filterList(category, inputName);
-  };
+  }; */
+
+  const onClickSearch = () =>{
+    goToSearchPage(history)
+  }
+
 
   return (
     <>
     <Header title="FutureEats" />
       <FeedPageContainer>
         <SearchFilter
-          onChangeName={onChangeName}
+          /* onChangeName={onChangeName} */
+          onClickSearch={onClickSearch}
           name={inputName}
           restaurants={restaurants}
           setRestaurants={setRestaurants}

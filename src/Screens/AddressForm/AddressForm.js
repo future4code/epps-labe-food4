@@ -9,7 +9,7 @@ import { getUserAddress } from "./../../Services/user";
 import GlobalStateContext from './../../Global/GlobalStateContext';
 
 const AddressForm = () => {
-  const [form, onChange] = useForm({
+  const [form, onChange, clearFields] = useForm({
     street: "",
     number: "",
     neighbourhood: "",

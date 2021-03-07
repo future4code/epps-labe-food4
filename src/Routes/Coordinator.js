@@ -26,6 +26,10 @@ export const goToProfile = (history) => {
   history.push("/profile");
 };
 
+export const goToSearchPage = (history) => {
+  history.push("/search");
+};
+
 export const goToCart = (history) => {
   history.push("/cart");
 };

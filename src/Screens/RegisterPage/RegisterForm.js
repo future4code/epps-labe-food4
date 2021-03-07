@@ -11,6 +11,7 @@ import { goToAddressPage } from "../../Routes/Coordinator";
 
 const RegisterForm = () => {
   const history = useHistory();
+
   const onChangeCpf = (e) => {
     setDocumentId(cpfMask(e.target.value));
   };
@@ -76,7 +77,6 @@ const RegisterForm = () => {
   const validatePassword = () => {
     const firstPassword = form.password;
     const secondPassword = form.confirmPassword;
-
     if (firstPassword === secondPassword) {
       setErrorPassword(false);
       registerUser();

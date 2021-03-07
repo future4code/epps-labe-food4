@@ -13,6 +13,7 @@ import useRequestData from "../../Hooks/useRequestData";
 import { goToProfileAddress, goToProfileInfo } from "../../Routes/Coordinator";
 import Loading from "../../Components/Loading/Loading";
 import Footer from "../../Components/Footer/index";
+import Header from "../../Components/Header/index";
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -21,6 +22,8 @@ const ProfilePage = () => {
 
   return profileInfo ? (
     <div>
+      <Header title="Perfil" arrow="true" />
+
       <MainContainer>
         <BaseContainer>
           <Text>{profileInfo.user.name}</Text>
@@ -69,6 +72,7 @@ const ProfilePage = () => {
         )}
         <Footer />
       </MainContainer>
+      <Footer />
     </div>
   ) : (
     <div>
