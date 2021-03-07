@@ -5,18 +5,20 @@ export const Container = styled.div`
   top: 0;
   left: 0;
   z-index: 2;
-  width: 360px;
+  width: 100vw;
+  max-width: 420px;
   height: 44px;
 
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 30px 1fr 30px;
   align-items: center;
   cursor: default;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+
+  /* -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px); */
   box-shadow: 0 0.5px 0 0 var(--black-25);
   background-color: #ffffff;
-  margin-top: 8px;
+  margin: 8px 0;
 
   #arrow {
     width: 23px;
@@ -31,12 +33,12 @@ export const Container = styled.div`
   }
 
   #title {
-    width: 175px;
+    width: 100%;
     height: 44px;
     /* margin: 20px 92px 0 54px; */
     padding: 13px 66px 12px;
     p {
-      width: 43px;
+      /* width: 43px; */
       height: 19px;
       font-family: "Roboto";
       font-size: 16px;

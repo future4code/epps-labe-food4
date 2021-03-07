@@ -85,19 +85,19 @@ export const RestaurantDelivery = styled.p`
 
 export const Button = styled.button`
   cursor: pointer;
-  margin: 8px 0 15px 0;
-  position: relative;
+  margin: 8px 0 15px;
+  /* position: relative; */
   border: 2px solid #5cb646;
   transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
   outline: none;
-  width: 90vw;
+  width: 100%;
   height: 42px;
   padding: 12px 16px;
   border-radius: 2px;
   background-color: #5cb646;
-  z-index: 1;
-  overflow: hidden;
-  &:hover:before {
+  /* z-index: 1; */
+  /* overflow: hidden; */
+  /* &:hover:before {
     left: 0%;
     right: auto;
     width: 100%;
@@ -112,7 +112,7 @@ export const Button = styled.button`
     content: "";
     background: #44c933;
     transition: all 0.4s cubic-bezier(0.42, 0, 0.58, 1);
-  }
+  } */
 `;
 
 export const ButtonContainer = styled.div`
@@ -121,4 +121,6 @@ export const ButtonContainer = styled.div`
   height: 42px;
   margin: 16px 0 16px;
   padding: 0 16px;
+  display: flex;
+  justify-content: center;
 `;

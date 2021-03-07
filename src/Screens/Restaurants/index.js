@@ -6,6 +6,7 @@ import { Container } from "./styled";
 import RestaurantInfo from "./RestaurantInfo";
 import MenuItemCard from "../../Components/MenuItemCard";
 import Footer from "../../Components/Footer";
+import { deliveryText } from './../../Global/Functions';
 
 const Restaurants = () => {
   const { restaurantId } = useParams();
@@ -27,22 +28,7 @@ const Restaurants = () => {
     getRestaurants();
   }, []);
 
-  let deliveryTime = "";
-  if (restaurant.deliveryTime <= 15) {
-    deliveryTime = "0 - 15 min";
-  }
-  if (restaurant.deliveryTime > 15 && restaurant.deliveryTime <= 30) {
-    deliveryTime = "15 - 30 min";
-  }
-  if (restaurant.deliveryTime > 30 && restaurant.deliveryTime <= 45) {
-    deliveryTime = "30 - 45 min";
-  }
-  if (restaurant.deliveryTime > 45 && restaurant.deliveryTime <= 60) {
-    deliveryTime = "45 - 60 min";
-  }
-  if (restaurant.deliveryTime > 60) {
-    deliveryTime = "60+ min";
-  }
+  const deliveryTime = deliveryText(restaurant);
 
   let menuCategories = [
     restaurant && restaurant.products && restaurant.products[0].category,

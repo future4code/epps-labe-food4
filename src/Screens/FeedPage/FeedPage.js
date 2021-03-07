@@ -5,7 +5,6 @@ import RestaurantsCard from "../../Components/RestaurantsCard/RestaurantsCard";
 import { SearchFilter } from "../../Components/SearchFilter/SearchFilter";
 import clock from "../../Imgs/clock.png";
 import {
-  Wrapper,
   ContainerCardFeed,
   FeedPageContainer,
   OrderBar,
@@ -18,7 +17,9 @@ import { useProtectedPage } from "./../../Hooks/useProtectedPage";
 import { goToRestaurant } from "../../Routes/Coordinator";
 import { useHistory } from "react-router-dom";
 import { getActiveOrder } from "../../Services/user";
+import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
+import { deliveryText } from './../../Global/Functions';
 
 function FeedPage() {
   useProtectedPage();
@@ -60,7 +61,11 @@ function FeedPage() {
       restaurants &&
       restaurants
         .filter((restaurant) => {
-          return restaurant.category.includes(category);
+          if (category === "Todos") {
+            return restaurant;
+          } else {
+            return restaurant.category.includes(category);
+          }
         })
         .filter((restaurant) =>
           restaurant.name.toLowerCase().includes(inputName.toLowerCase())
@@ -72,28 +77,13 @@ function FeedPage() {
   const filteredList = filterList();
 
   const render = filteredList.map((res) => {
-    let deliveryTime = "";
-    if (res.deliveryTime <= 15) {
-      deliveryTime = "0 - 15";
-    }
-    if (res.deliveryTime > 15 && res.deliveryTime <= 30) {
-      deliveryTime = "15 - 30";
-    }
-    if (res.deliveryTime > 30 && res.deliveryTime <= 45) {
-      deliveryTime = "30 - 45";
-    }
-    if (res.deliveryTime > 45 && res.deliveryTime <= 60) {
-      deliveryTime = "45 - 60";
-    }
-    if (res.deliveryTime > 60) {
-      deliveryTime = "60+";
-    }
+    const deliveryTime = deliveryText(res);
     return (
       <RestaurantsCard
         key={res.id}
         img={res.logoUrl}
         restaurant={res.name}
-        deliveryTime={res.deliveryTime}
+        deliveryTime={deliveryTime}
         tax={res.shipping}
         onClick={() => goToRestaurant(history, res.id)}
       />
@@ -113,33 +103,36 @@ function FeedPage() {
   };
 
   return (
-    <FeedPageContainer>
-      <SearchFilter
-        onChangeName={onChangeName}
-        name={inputName}
-        restaurants={restaurants}
-        setRestaurants={setRestaurants}
-      />
-      <CategoryFilter
-        restaurants={restaurants}
-        onClickCategory={onClickCategory}
-      />
+    <>
+    <Header title="FutureEats" />
+      <FeedPageContainer>
+        <SearchFilter
+          onChangeName={onChangeName}
+          name={inputName}
+          restaurants={restaurants}
+          setRestaurants={setRestaurants}
+        />
+        <CategoryFilter
+          restaurants={restaurants}
+          onClickCategory={onClickCategory}
+        />
 
-      <ContainerCardFeed>{render}</ContainerCardFeed>
-      {order && (
-        <OrderBar>
-          <IconContainer>
-            <img src={clock} />
-          </IconContainer>
-          <TextOrderContainer>
-            <TextOrder>Pedido em andamento</TextOrder>
-            {order.restaurantName}
-            <SubTotalText>SUBTOTAL R$ {order.totalPrice}</SubTotalText>
-          </TextOrderContainer>
-        </OrderBar>
-      )}
-      <Footer />
-    </FeedPageContainer>
+        <ContainerCardFeed>{render}</ContainerCardFeed>
+        {order && (
+          <OrderBar>
+            <IconContainer>
+              <img src={clock} />
+            </IconContainer>
+            <TextOrderContainer>
+              <TextOrder>Pedido em andamento</TextOrder>
+              {order.restaurantName}
+              <SubTotalText>SUBTOTAL R$ {order.totalPrice}</SubTotalText>
+            </TextOrderContainer>
+          </OrderBar>
+        )}
+      </FeedPageContainer>
+      <Footer/>
+    </>
   );
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import { Container } from "./styled";
 import homeIcon from "./Imgs/home-icon.png";
 import homeIconActive from "./Imgs/home-icon-active.png";
@@ -9,31 +9,33 @@ import profileIconActive from "./Imgs/profile-icon-active.png";
 import { useHistory } from "react-router-dom";
 import { goToCart, goToProfile } from "../../Routes/Coordinator";
 import { goToFeed } from "./../../Routes/Coordinator";
+import GlobalStateContext from './../../Global/GlobalStateContext';
 
 const Footer = () => {
   const history = useHistory();
-  const [activeHome, setActiveHome] = useState(false);
-  const [activeCart, setActiveCart] = useState(false);
-  const [activeProfile, setActiveProfile] = useState(false);
+  const {states, setters} = useContext(GlobalStateContext)
+  // const [activeHome, setActiveHome] = useState(false);
+  // const [activeCart, setActiveCart] = useState(false);
+  // const [activeProfile, setActiveProfile] = useState(false);
 
   const homeClick = () => {
-    setActiveHome(!activeHome);
-    setActiveCart(false);
-    setActiveProfile(false);
+    setters.setActiveHome(!states.activeHome);
+    setters.setActiveCart(false);
+    setters.setActiveProfile(false);
     goToFeed(history);
   };
 
   const cartClick = () => {
-    setActiveHome(false);
-    setActiveCart(!activeCart);
-    setActiveProfile(false);
+    setters.setActiveHome(false);
+    setters.setActiveCart(!states.activeCart);
+    setters.setActiveProfile(false);
     goToCart(history);
   };
 
   const profileClick = () => {
-    setActiveHome(false);
-    setActiveCart(false);
-    setActiveProfile(!activeProfile);
+    setters.setActiveHome(false);
+    setters.setActiveCart(false);
+    setters.setActiveProfile(!states.activeProfile);
     goToProfile(history);
   };
 
@@ -41,21 +43,21 @@ const Footer = () => {
     <Container>
       <div className="icon">
         <img
-          src={activeHome ? homeIconActive : homeIcon}
+          src={states.activeHome ? homeIconActive : homeIcon}
           alt="home icon"
           onClick={homeClick}
         />
       </div>
       <div className="icon">
         <img
-          src={activeCart ? cartIconActive : cartIcon}
+          src={states.activeCart ? cartIconActive : cartIcon}
           alt="cart icon"
           onClick={cartClick}
         />
       </div>
       <div className="icon">
         <img
-          src={activeProfile ? profileIconActive : profileIcon}
+          src={states.activeProfile ? profileIconActive : profileIcon}
           alt="profile icon"
           onClick={profileClick}
         />

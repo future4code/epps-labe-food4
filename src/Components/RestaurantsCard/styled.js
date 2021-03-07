@@ -6,7 +6,7 @@ export const ResCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 360px; */
+  /* max-width: 420px; */
   height: 196px;
   margin: 8px 0 0;
   padding: 8px 16px 0;
@@ -17,6 +17,7 @@ export const ResCard = styled.div`
     padding: 0 0 16px;
     border-radius: 8px;
     border: solid 1px var(--greyish);
+    cursor: pointer;
 
     img {
       width: 328px;

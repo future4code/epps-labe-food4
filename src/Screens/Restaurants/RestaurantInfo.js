@@ -14,7 +14,7 @@ const RestaurantInfo = (props) => {
           <p id="name">{props.name}</p>
           <p id="category">{props.category}</p>
           <div>
-            <p id="delivery-time">{props.deliveryTime}</p>
+            <p id="delivery-time">{props.deliveryTime} min</p>
             <p id="shipping">Frete R${props.shipping}</p>
           </div>
           <p id="address">{props.address}</p>

@@ -8,7 +8,7 @@ export const Wrapper = styled.div`
 `;
 
 export const TitleEnter = styled.div`
-  width: 360px;
+  max-width: 420px;
   height: 42px;
   margin: 16px 0 0;
   padding: 12px 32px;

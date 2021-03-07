@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { Card } from "./styled";
-import GlobalStateContext from "./../../GlobalState/GlobalStateContext";
+import GlobalStateContext from "./../../Global/GlobalStateContext";
 import Popup from "./Popup";
 
 const MenuItemCard = (props) => {

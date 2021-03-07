@@ -6,7 +6,7 @@ export const Card = styled.div`
   align-items: center;
 
   height: 120px;
-  width: 360px;
+  max-width: 420px;
   margin: 8px 0 0;
   padding: 8px 16px 0;
 
@@ -23,11 +23,11 @@ export const Card = styled.div`
     width: 96px;
     height: 112px;
     margin: 0 16px 0 0;
-    overflow-x: hidden;
+    overflow: hidden;
     img {
       height: 100%;
       border-radius: 8px 0 0 8px;
-      object-fit: contain;
+      margin-left: -40px;
     }
   }
 
@@ -112,6 +112,7 @@ export const Card = styled.div`
         bottom: 0;
         right: 0;
         outline: none;
+        cursor: pointer;
       }
     }
   }
@@ -143,7 +144,7 @@ export const Wrapper = styled.div`
     align-items: center;
 
     #Title {
-      width: 360px;
+      max-width: 420px;
       height: 42px;
       margin: 31px 0 0;
       padding: 6px 32px 12px 16px;
@@ -223,7 +224,7 @@ export const PopupBox = styled.div`
   align-items: center;
 
   #Title {
-    width: 360px;
+    max-width: 420px;
     height: 42px;
     margin: 31px 0 0;
     padding: 6px 32px 12px 16px;

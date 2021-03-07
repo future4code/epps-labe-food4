@@ -15,7 +15,7 @@ export const LogoImgRegister = styled.img`
 `;
 
 export const TitleAddress = styled.div`
-  width: 360px;
+  max-width: 420px;
   height: 42px;
   margin: 16px 0 0;
   padding: 12px 32px;
