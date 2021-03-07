@@ -3,6 +3,7 @@ import GlobalState from "./Global/GlobalState";
 import Router from "./Routes/Router";
 import { Bg, Wrapper } from "./Global/styled";
 import Footer from "./Components/Footer";
+import SearchPage from "./Screens/SearchPage/SearchPage";
 
 function App() {
   let path = window.location.pathname;

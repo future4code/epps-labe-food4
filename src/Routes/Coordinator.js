@@ -10,6 +10,10 @@ export const goToFeed = (history) => {
   history.push("/feed");
 };
 
+export const goToSearchPage = (history) => {
+  history.push("/search");
+};
+
 export const goToRegister = (history) => {
   history.push("/register");
 };

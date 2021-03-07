@@ -14,6 +14,7 @@ export const SearchFilter = (props) => {
         type="text"
         name="restaurant"
         placeholder="Restaurante..."
+        onClick={props.onClickSearch}
         onChange={props.onChangeName}
         InputProps={{
           startAdornment: (

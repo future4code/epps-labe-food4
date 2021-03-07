@@ -10,6 +10,7 @@ import ProfilePage from "../Screens/ProfilePage/ProfilePage";
 import EditAddress from "../Screens/ProfilePage/EditPage/EditAddress";
 import EdditInfos from "../Screens/ProfilePage/EditPage/EditInfo";
 import CartPage from "../Screens/CartPage/CartPage";
+import SearchPage from "../Screens/SearchPage/SearchPage";
 
 function Router() {
   return (
@@ -21,6 +22,10 @@ function Router() {
 
         <Route exact path="/feed">
           <FeedPage />
+        </Route>
+
+        <Route exact path="/search">
+          <SearchPage />
         </Route>
 
         <Route exact path="/register">
