@@ -38,6 +38,7 @@ const CartPage = () => {
   const { states, setters } = useContext(GlobalStateContext);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [userAddress, setUserAddress] = useState(undefined);
+  const [id, setId] = useState('')
 
   useEffect(() => {
     getUserAddress(setUserAddress);
@@ -52,6 +53,7 @@ const CartPage = () => {
       alert("Selecione um método de pagamento.");
     } else if (states.cart.length > 0) {
       const productsArray = states.cart[0].order.map((item) => {
+        setId(item.id)
         return {
           id: item.id,
           quantity: item.quantity,
@@ -62,12 +64,12 @@ const CartPage = () => {
         products: productsArray,
         paymentMethod: paymentMethod,
       };
-      placeOrder(body, states.cart.id, history);
+      placeOrder(body, states.cart[0].id, history);
     } else {
       alert("Escolha um produto!");
     }
   };
-
+console.log('id', states.cart[0] && states.cart[0].id)
   const removeItemFromCart = (id) => {
     let cartArray = [...states.cart];
     if (cartArray[0].order.length > 1) {

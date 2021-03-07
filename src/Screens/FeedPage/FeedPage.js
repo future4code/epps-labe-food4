@@ -132,7 +132,7 @@ function FeedPage() {
             <TextOrderContainer>
               <TextOrder>Pedido em andamento</TextOrder>
               {order.restaurantName}
-              <SubTotalText>SUBTOTAL R$ {order.totalPrice}</SubTotalText>
+              <SubTotalText>SUBTOTAL R$ {order.totalPrice.toFixed(2)}</SubTotalText>
             </TextOrderContainer>
           </OrderBar>
         )}
