@@ -11,7 +11,8 @@ import HistoryCard from "../../Components/HistoryCard/HistoryCard";
 import { BASE_URL } from "../../Constants/Urls";
 import useRequestData from "../../Hooks/useRequestData";
 import { goToProfileAddress, goToProfileInfo } from "../../Routes/Coordinator";
-import Loading from "../../Components/Loading/Loading"
+import Loading from "../../Components/Loading/Loading";
+import Footer from "../../Components/Footer/index";
 
 const ProfilePage = () => {
   const history = useHistory();
@@ -66,6 +67,7 @@ const ProfilePage = () => {
             </HistoryCardNoneContent>
           </HistoryCardNone>
         )}
+        <Footer />
       </MainContainer>
     </div>
   ) : (

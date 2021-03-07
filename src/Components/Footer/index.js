@@ -1,60 +1,69 @@
-import React, {useState} from 'react'
-import { Container } from './styled';
-import homeIcon from "./Imgs/home-icon.png"
+import React, { useContext } from "react";
+import { Container } from "./styled";
+import homeIcon from "./Imgs/home-icon.png";
 import homeIconActive from "./Imgs/home-icon-active.png";
 import cartIcon from "./Imgs/cart-icon.png";
 import cartIconActive from "./Imgs/cart-icon-active.png";
 import profileIcon from "./Imgs/profile-icon.png";
 import profileIconActive from "./Imgs/profile-icon-active.png";
+import { useHistory } from "react-router-dom";
+import { goToCart, goToProfile } from "../../Routes/Coordinator";
+import { goToFeed } from "./../../Routes/Coordinator";
+import GlobalStateContext from './../../Global/GlobalStateContext';
 
 const Footer = () => {
-    const[activeHome, setActiveHome] = useState(false)
-    const [activeCart, setActiveCart] = useState(false);
-    const [activeProfile, setActiveProfile] = useState(false);
+  const history = useHistory();
+  const {states, setters} = useContext(GlobalStateContext)
+  // const [activeHome, setActiveHome] = useState(false);
+  // const [activeCart, setActiveCart] = useState(false);
+  // const [activeProfile, setActiveProfile] = useState(false);
 
-    const homeClick = () => {
-        setActiveHome(!activeHome);
-        setActiveCart(false);
-        setActiveProfile(false);
-    }
+  const homeClick = () => {
+    setters.setActiveHome(!states.activeHome);
+    setters.setActiveCart(false);
+    setters.setActiveProfile(false);
+    goToFeed(history);
+  };
 
-    const cartClick = () => {
-      setActiveHome(false);
-      setActiveCart(!activeCart);
-      setActiveProfile(false);
-    };
+  const cartClick = () => {
+    setters.setActiveHome(false);
+    setters.setActiveCart(!states.activeCart);
+    setters.setActiveProfile(false);
+    goToCart(history);
+  };
 
-    const profileClick = () => {
-      setActiveHome(false);
-      setActiveCart(false);
-      setActiveProfile(!activeProfile);
-    };
+  const profileClick = () => {
+    setters.setActiveHome(false);
+    setters.setActiveCart(false);
+    setters.setActiveProfile(!states.activeProfile);
+    goToProfile(history);
+  };
 
-    return (
-      <Container>
-        <div className="icon">
-          <img
-            src={activeHome ? homeIconActive : homeIcon}
-            alt="home icon"
-            onClick={homeClick}
-          />
-        </div>
-        <div className="icon">
-          <img
-            src={activeCart ? cartIconActive : cartIcon}
-            alt="cart icon"
-            onClick={cartClick}
-          />
-        </div>
-        <div className="icon">
-          <img
-            src={activeProfile ? profileIconActive : profileIcon}
-            alt="profile icon"
-            onClick={profileClick}
-          />
-        </div>
-      </Container>
-    );
-}
+  return (
+    <Container>
+      <div className="icon">
+        <img
+          src={states.activeHome ? homeIconActive : homeIcon}
+          alt="home icon"
+          onClick={homeClick}
+        />
+      </div>
+      <div className="icon">
+        <img
+          src={states.activeCart ? cartIconActive : cartIcon}
+          alt="cart icon"
+          onClick={cartClick}
+        />
+      </div>
+      <div className="icon">
+        <img
+          src={states.activeProfile ? profileIconActive : profileIcon}
+          alt="profile icon"
+          onClick={profileClick}
+        />
+      </div>
+    </Container>
+  );
+};
 
-export default Footer
+export default Footer;

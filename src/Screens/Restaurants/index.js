@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import {useParams} from 'react-router-dom';
+import { useParams } from "react-router-dom";
 import axios from "axios";
 import { BASE_URL } from "./../../Constants/Urls";
 import { Container } from "./styled";
 import RestaurantInfo from "./RestaurantInfo";
 import MenuItemCard from "../../Components/MenuItemCard";
+import Footer from "../../Components/Footer";
+import { deliveryText } from './../../Global/Functions';
 
 const Restaurants = () => {
   const { restaurantId } = useParams();
@@ -12,7 +14,10 @@ const Restaurants = () => {
   const getRestaurants = async () => {
     const headers = { headers: { auth: localStorage.getItem("token") } };
     try {
-      const res = await axios.get(`${BASE_URL}/restaurants/${restaurantId}`, headers);
+      const res = await axios.get(
+        `${BASE_URL}/restaurants/${restaurantId}`,
+        headers
+      );
       setRestaurant(res.data.restaurant);
     } catch (err) {
       alert(err.message);
@@ -23,22 +28,7 @@ const Restaurants = () => {
     getRestaurants();
   }, []);
 
-  let deliveryTime = "";
-  if (restaurant.deliveryTime <= 15) {
-    deliveryTime = "0 - 15 min";
-  }
-  if (restaurant.deliveryTime > 15 && restaurant.deliveryTime <= 30) {
-    deliveryTime = "15 - 30 min";
-  }
-  if (restaurant.deliveryTime > 30 && restaurant.deliveryTime <= 45) {
-    deliveryTime = "30 - 45 min";
-  }
-  if (restaurant.deliveryTime > 45 && restaurant.deliveryTime <= 60) {
-    deliveryTime = "45 - 60 min";
-  }
-  if (restaurant.deliveryTime > 60) {
-    deliveryTime = "60+ min";
-  }
+  const deliveryTime = deliveryText(restaurant);
 
   let menuCategories = [
     restaurant && restaurant.products && restaurant.products[0].category,
@@ -77,6 +67,12 @@ const Restaurants = () => {
                     return (
                       <MenuItemCard
                         key={item.id}
+                        restaurantId={restaurant.id}
+                        name={restaurant.name}
+                        address={restaurant.address}
+                        deliveryTime={deliveryTime}
+                        shipping={restaurant.shipping}
+                        productId={item.id}
                         img={item.photoUrl}
                         title={item.name}
                         description={item.description}
@@ -89,6 +85,7 @@ const Restaurants = () => {
           );
         })}
       </div>
+      <Footer />
     </Container>
   );
 };

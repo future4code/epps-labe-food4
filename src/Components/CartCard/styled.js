@@ -5,7 +5,7 @@ export const Card = styled.div`
   justify-content: center;
   align-items: center;
   height: 120px;
-  width: 360px;
+  max-width: 420px;
   margin: 8px 0 0;
   padding: 8px 16px 0 0;
   #Retangle {

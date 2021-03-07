@@ -8,7 +8,7 @@ import useForm from "../../../Hooks/useForm";
 import useRequestData from "../../../Hooks/useRequestData";
 import axios from "axios";
 
-const EditAdressPage = () => {
+const EditAddressPage = () => {
   const history = useHistory();
   const [form, onChange, clearFields, setValues] = useForm({
     street: "",
@@ -104,4 +104,4 @@ const EditAdressPage = () => {
   );
 };
 
-export default EditAdressPage;
+export default EditAddressPage;
