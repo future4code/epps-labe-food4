@@ -14,8 +14,8 @@ top: 50%;
 left: 50%;
 transform: translate(-50%, -50%);
 z-index: -1;
-width: 100vw;
+width: 100%;
 max-width: 420px;
-height: 100vh;
+height: 100%;
 background-color: #ffffff;
 `
