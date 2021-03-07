@@ -4,7 +4,7 @@ import GlobalStateContext from "./GlobalStateContext";
 const GlobalState = (props) => {
   const [address, setAddress] = useState([])
   const [cart, setCart] = useState([]);
-
+console.log('cart', cart)
   const [activeHome, setActiveHome] = useState(false);
   const [activeCart, setActiveCart] = useState(false);
   const [activeProfile, setActiveProfile] = useState(false);
