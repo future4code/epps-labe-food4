@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { CategoryFilter } from "../../Components/CategoryFilter/CategoryFilter";
 import RestaurantsCard from "../../Components/RestaurantsCard/RestaurantsCard";
 import { SearchFilter } from "../../Components/SearchFilter/SearchFilter";
-import axios from "axios";
+import clock from "../../Imgs/clock.png";
 import {
   ContainerCardFeed,
-  IconContainer,
+  FeedPageContainer,
   OrderBar,
-  SubTotalText,
+  IconContainer,
   TextOrderContainer,
   TextOrder,
-  FeedPageContainer,
+  SubTotalText,
 } from "./styled";
+import { useProtectedPage } from "./../../Hooks/useProtectedPage";
+import { goToRestaurant } from "../../Routes/Coordinator";
+import { useHistory } from "react-router-dom";
 import { getActiveOrder } from "../../Services/user";
-import clock from "../../Imgs/clock.png";
-import Footer from "../../Components/Footer/index";
+import Header from "../../Components/Header";
+import Footer from "../../Components/Footer";
+import { deliveryText } from './../../Global/Functions';
 
 function FeedPage() {
+  useProtectedPage();
+  const history = useHistory();
   const [restaurants, setRestaurants] = useState([]);
   const [category, setCategory] = useState("");
   const [inputName, setInputName] = useState("");
@@ -33,8 +40,7 @@ function FeedPage() {
         `https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/restaurants`,
         {
           headers: {
-            auth:
-              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6Imd2dVE5MkxBSXdMVm5RdjBjY3dyIiwibmFtZSI6IkRhbmllbFIiLCJlbWFpbCI6ImRhbm4ucmliQGdtYWlsLmNvbSIsImNwZiI6IjE2NS4xNTIuNzc3LTAwIiwiaGFzQWRkcmVzcyI6dHJ1ZSwiYWRkcmVzcyI6IlIuIEpvc8OpIGd1aW1hcsOjZXMsIDE3NywgNzEgLSBCb2FjYSBkbyBSaW8iLCJpYXQiOjE2MTQ3MDg2NTh9.GoVyPdn8CYzkQuw2Mw3d0juipqDlsvQBhqmhCr2d2UQ",
+            auth: localStorage.getItem("token"),
           },
         }
       )
@@ -55,7 +61,11 @@ function FeedPage() {
       restaurants &&
       restaurants
         .filter((restaurant) => {
-          return restaurant.category.includes(category);
+          if (category === "Todos") {
+            return restaurant;
+          } else {
+            return restaurant.category.includes(category);
+          }
         })
         .filter((restaurant) =>
           restaurant.name.toLowerCase().includes(inputName.toLowerCase())
@@ -67,13 +77,15 @@ function FeedPage() {
   const filteredList = filterList();
 
   const render = filteredList.map((res) => {
+    const deliveryTime = deliveryText(res);
     return (
       <RestaurantsCard
         key={res.id}
         img={res.logoUrl}
         restaurant={res.name}
-        deliveryTime={res.deliveryTime}
+        deliveryTime={deliveryTime}
         tax={res.shipping}
+        onClick={() => goToRestaurant(history, res.id)}
       />
     );
   });
@@ -90,36 +102,37 @@ function FeedPage() {
     filterList(category, inputName);
   };
 
-  console.log(render);
-
   return (
-    <FeedPageContainer>
-      <SearchFilter
-        onChangeName={onChangeName}
-        name={inputName}
-        restaurants={restaurants}
-        setRestaurants={setRestaurants}
-      />
-      <CategoryFilter
-        restaurants={restaurants}
-        onClickCategory={onClickCategory}
-      />
+    <>
+    <Header title="FutureEats" />
+      <FeedPageContainer>
+        <SearchFilter
+          onChangeName={onChangeName}
+          name={inputName}
+          restaurants={restaurants}
+          setRestaurants={setRestaurants}
+        />
+        <CategoryFilter
+          restaurants={restaurants}
+          onClickCategory={onClickCategory}
+        />
 
-      <ContainerCardFeed>{render}</ContainerCardFeed>
-      {order && (
-        <OrderBar>
-          <IconContainer>
-            <img src={clock} />
-          </IconContainer>
-          <TextOrderContainer>
-            <TextOrder>Pedido em andamento</TextOrder>
-            {order.restaurantName}
-            <SubTotalText>SUBTOTAL R$ {order.totalPrice}</SubTotalText>
-          </TextOrderContainer>
-        </OrderBar>
-      )}
-      <Footer />
-    </FeedPageContainer>
+        <ContainerCardFeed>{render}</ContainerCardFeed>
+        {order && (
+          <OrderBar>
+            <IconContainer>
+              <img src={clock} />
+            </IconContainer>
+            <TextOrderContainer>
+              <TextOrder>Pedido em andamento</TextOrder>
+              {order.restaurantName}
+              <SubTotalText>SUBTOTAL R$ {order.totalPrice}</SubTotalText>
+            </TextOrderContainer>
+          </OrderBar>
+        )}
+      </FeedPageContainer>
+      <Footer/>
+    </>
   );
 }
 

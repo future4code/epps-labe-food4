@@ -14,15 +14,18 @@ const CartCard = (props) => {
             <div id="Quantity">
               <p>{props.quantity}</p>
             </div>
+            <div>
+              <p>{props.name}</p>
+            </div>
           </div>
           <div id="Main">
             <p>{props.description}</p>
           </div>
           <div id="Footer">
-            <p>R${props.price}.00</p>
+            <p>R${props.price}</p>
             <button
               id="remove-btn"
-              onClick={() => props.removeItemFromCart(props.id)}
+              onClick={() => props.removeItem(props.id)}
             >
               remover
             </button>

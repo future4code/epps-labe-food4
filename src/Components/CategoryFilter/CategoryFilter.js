@@ -1,28 +1,39 @@
 import React from "react";
-import { FilterField, FilterText } from "./styled";
+import { CategoryContainer, FilterField, FilterText } from "./styled";
 
 export const CategoryFilter = (props) => {
-  const restaurants = props.restaurants
-  
-  const categoryList = restaurants && restaurants.map((res) =>{
-    return res.category
-  })
-  
-  let FilteredCategoryList = categoryList && categoryList.filter(function(elem, pos, self) {
-    return self.indexOf(elem) === pos;
-  })
+  const restaurants = props.restaurants;
 
-  const renderCategory = FilteredCategoryList && FilteredCategoryList.map((category) =>{
-    return(
-      <p onClick={() => props.onClickCategory(category)} value={category} key={category}>{category}</p>
-    )
-  })
+  const categoryList =
+    restaurants &&
+    restaurants.map((res) => {
+      return res.category;
+    });
+
+  let FilteredCategoryList =
+    categoryList &&
+    categoryList.filter(function (elem, pos, self) {
+      return self.indexOf(elem) === pos;
+    });
+  categoryList && FilteredCategoryList.push("Todos");
+
+  const renderCategory =
+    FilteredCategoryList &&
+    FilteredCategoryList.map((category) => {
+      return (
+        <CategoryContainer
+          onClick={() => props.onClickCategory(category)}
+          value={category}
+          key={category}
+        >
+          {category}
+        </CategoryContainer>
+      );
+    });
 
   return (
     <FilterField>
-      <FilterText>
-        {renderCategory}
-      </FilterText>
+      <FilterText>{renderCategory}</FilterText>
     </FilterField>
   );
 };

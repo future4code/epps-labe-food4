@@ -9,15 +9,16 @@ const Popup = (props) => {
   }
 
   const [qtty, setQtty] = useState(0);
-  const addToCart = () => {
+  const confirm = () => {
     props.setQuantity(qtty);
     props.setOpenPopup(false);
+    props.addToCart(qtty);
   };
   const closePopup = (e) => {
-    if(bgRef.current === e.target){
+    if (bgRef.current === e.target) {
       props.setOpenPopup(false);
     }
-  }
+  };
 
   return (
     <Wrapper ref={bgRef} onClick={closePopup}>
@@ -36,7 +37,7 @@ const Popup = (props) => {
             );
           })}
         </select>
-        <p id="Btn" onClick={addToCart}>
+        <p id="Btn" onClick={confirm}>
           ADICIONAR AO CARRINHO
         </p>
       </div>

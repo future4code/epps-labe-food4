@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { goToRegister } from "../Routes/Coordinator";
+import { goToHome, goToRegister } from "../Routes/Coordinator";
 
 export const useProtectedPage = () => {
   const history = useHistory();
@@ -10,7 +10,7 @@ export const useProtectedPage = () => {
     const hasAddress = localStorage.getItem("hasAddress");
 
     if (!token) {
-      history.push("/");
+      goToHome(history);
     } else {
       if (!hasAddress) {
         goToRegister(history);

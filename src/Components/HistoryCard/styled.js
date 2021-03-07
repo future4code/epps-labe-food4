@@ -66,7 +66,7 @@ export const HistoryCardPrice = styled.h4`
 `;
 
 export const HistoryCardNone = styled.div`
-  width: 360px;
+  max-width: 420px;
   height: 42px;
   margin: 16px 0 248px;
   padding: 12px 32px;
