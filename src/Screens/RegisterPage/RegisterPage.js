@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import RegisterForm from "./RegisterForm";
 import Logo from "../../Imgs/logo-future-eats-invert.png";
-import { LogoImgRegister, TitleEnter, Wrapper } from "./styled";
+import { LogoImgRegister, TitleEnter } from "./styled";
 import AddressPage from "../AddressForm/AddressPage";
 import { goToFeed } from './../../Routes/Coordinator';
 import { useHistory } from 'react-router-dom';
+import Header from "../../Components/Header";
 
 const RegisterPage = () => {
   const history = useHistory();
@@ -23,17 +24,12 @@ const RegisterPage = () => {
 
   return (
     <>
-      {!step2 ? (
-        <Wrapper>
-          <LogoImgRegister src={Logo} />
-          <TitleEnter>
-            <p>Cadastrar</p>
-          </TitleEnter>
-          <RegisterForm setStep2={setStep2} />
-        </Wrapper>
-      ) : (
-        <AddressPage />
-      )}
+    <Header arrow='true'/>
+      <LogoImgRegister src={Logo} />
+      <TitleEnter>
+        <p>Cadastrar</p>
+      </TitleEnter>
+      <RegisterForm setStep2={setStep2} />
     </>
   );
 };

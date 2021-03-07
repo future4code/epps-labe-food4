@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import InputPassoword from "../../Components/ComponetInputs/InputPassword";
 import NormalInput from "../../Components/ComponetInputs/NormalInput";
@@ -6,21 +6,24 @@ import Buttons from "../../Components/Buttons/index";
 import useForm from "../../Hooks/useForm";
 import { useHistory } from "react-router-dom";
 import { cpfMask } from "./Mask";
-import AddressPage from "./../AddressForm/AddressPage";
+// import AddressPage from "./../AddressForm/AddressPage";
+import { goToAddressPage } from "../../Routes/Coordinator";
 
-const RegisterForm = (props) => {
+const RegisterForm = () => {
+  const history = useHistory();
+
   const onChangeCpf = (e) => {
     setDocumentId(cpfMask(e.target.value));
   };
   const [documentId, setDocumentId] = useState("");
-  const [form, onChange, clearFields] = useForm({
+  const [form, onChange, clearFields, setValues] = useForm({
     name: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
   const [errorPassword, setErrorPassword] = useState();
-  const body = {
+  let body = {
     name: form.name,
     email: form.email,
     cpf: documentId,
@@ -32,7 +35,21 @@ const RegisterForm = (props) => {
     event.preventDefault();
     validatePassword();
   };
-  console.log("CPF", cpfMask);
+
+  // Para manter os campos preenchidos mesmo mudando de página
+  useEffect(() => {
+    const regBody = JSON.parse(localStorage.getItem("reg-body"))
+    if(regBody){
+      const info = {
+        name: regBody.name,
+        email: regBody.email,
+        password: '',
+        confirmPassword: '',
+      };
+      setDocumentId(regBody.cpf);
+      setValues(info);
+    }
+  }, [])
 
   const registerUser = () => {
     axios
@@ -42,18 +59,24 @@ const RegisterForm = (props) => {
       )
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        clearFields();
-        props.setStep2(true);
+        // clearFields();
+        localStorage.setItem("reg-body", JSON.stringify(body))
+        goToAddressPage(history);
       })
       .catch((err) => {
-        alert(err.response.data.message);
+        const errorArray = err.message.split(" ");
+        if (errorArray[errorArray.length - 1] === "409") {
+          alert("E-mail e/ou CPF já cadastrado!");
+          history.replace("/register/2")
+        } else {
+          alert(err.message);
+        }
       });
   };
 
   const validatePassword = () => {
     const firstPassword = form.password;
     const secondPassword = form.confirmPassword;
-
     if (firstPassword === secondPassword) {
       setErrorPassword(false);
       registerUser();
@@ -92,6 +115,7 @@ const RegisterForm = (props) => {
           required
           type={"text"}
           pattern={"/(d{3})(d{3})(d{3})(d{2})/"}
+          minLength="14"
           maxLength="14"
         />
         <InputPassoword

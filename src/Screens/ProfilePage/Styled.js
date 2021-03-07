@@ -2,9 +2,11 @@ import styled from "styled-components";
 import { Typography } from "@material-ui/core";
 
 export const MainContainer = styled.div`
+  width: 100vw;
+  max-width: 420px;
   box-sizing: border-box;
   display: flex;
-  padding: 10px;
+  /* padding: 10px; */
   gap: 2px;
   flex-direction: column;
   align-items: flex-start;
@@ -14,8 +16,8 @@ export const MainContainer = styled.div`
 export const BaseContainer = styled.div`
   width: 100%;
   display: flex;
+  padding: 10px;
   margin: 0;
-  padding: 0;
   justify-content: space-between;
   align-items: center;
 `;

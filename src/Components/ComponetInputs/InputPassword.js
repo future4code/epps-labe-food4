@@ -15,8 +15,6 @@ import theme from "./Theme/theme";
 function ComponentInputs(props) {
   const verificar = props.errorPassword;
 
-  console.log("verificar", verificar);
-
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",

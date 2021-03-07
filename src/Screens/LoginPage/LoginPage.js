@@ -32,7 +32,7 @@ const LoginPage = () => {
           <TitleRegister>
             <p>
               Não possui cadastro?{" "}
-              <Link to="/register">
+              <Link to="/register/1">
                 <b>Clique aqui.</b>
               </Link>
             </p>

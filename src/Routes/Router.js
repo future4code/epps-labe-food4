@@ -4,7 +4,7 @@ import ErrorPage from "../Screens/ErrorPage/ErrorPage";
 import FeedPage from "../Screens/FeedPage/FeedPage";
 import LoginPage from "../Screens/LoginPage/LoginPage";
 import RegisterPage from "../Screens/RegisterPage/RegisterPage";
-// import AddressPage from "../Screens/AdressForm/AdressPage";
+import AddressPage from "../Screens/AddressForm/AddressPage";
 import RestarantsInfos from "../Screens/Restaurants/index";
 import ProfilePage from "../Screens/ProfilePage/ProfilePage";
 import EditAddress from "../Screens/ProfilePage/EditPage/EditAddress";
@@ -24,17 +24,17 @@ function Router() {
           <FeedPage />
         </Route>
 
-        <Route exact path="/search">
-          <SearchPage />
-        </Route>
-
-        <Route exact path="/register">
+        <Route exact path="/register/1">
           <RegisterPage />
         </Route>
 
-        {/* <Route exact path="/address-form">
-            <AddressPage />
-          </Route> */}
+        <Route exact path="/register/2">
+          <AddressPage />
+        </Route>
+
+        <Route exact path="/search">
+          <SearchPage />
+        </Route>
 
         <Route exact path="/restaurant/:restaurantId">
           <RestarantsInfos />

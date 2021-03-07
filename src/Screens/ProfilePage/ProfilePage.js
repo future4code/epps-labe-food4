@@ -70,6 +70,7 @@ const ProfilePage = () => {
             </HistoryCardNoneContent>
           </HistoryCardNone>
         )}
+        <Footer />
       </MainContainer>
       <Footer />
     </div>

@@ -15,7 +15,7 @@ export const CategoryFilter = (props) => {
     categoryList.filter(function (elem, pos, self) {
       return self.indexOf(elem) === pos;
     });
-  FilteredCategoryList.push("Todos");
+  categoryList && FilteredCategoryList.push("Todos");
 
   const renderCategory =
     FilteredCategoryList &&

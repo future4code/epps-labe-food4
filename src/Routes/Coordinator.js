@@ -10,16 +10,12 @@ export const goToFeed = (history) => {
   history.push("/feed");
 };
 
-export const goToSearchPage = (history) => {
-  history.push("/search");
-};
-
 export const goToRegister = (history) => {
-  history.push("/register");
+  history.push("/register/1");
 };
 
 export const goToAddressPage = (history) => {
-  history.push("/address");
+  history.push("/register/2");
 };
 
 export const goToRestaurant = (history, id) => {
@@ -28,6 +24,10 @@ export const goToRestaurant = (history, id) => {
 
 export const goToProfile = (history) => {
   history.push("/profile");
+};
+
+export const goToSearchPage = (history) => {
+  history.push("/search");
 };
 
 export const goToCart = (history) => {

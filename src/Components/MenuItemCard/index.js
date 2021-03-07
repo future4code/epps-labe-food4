@@ -63,8 +63,9 @@ const MenuItemCard = (props) => {
           },
         ],
       };
-      cartArray.push(orderInfo);
-      setters.setCart(cartArray);
+      // cartArray.push(orderInfo);
+      setters.setCart([orderInfo]);
+
     } else {
       const orderInfo = {
         id: props.productId,

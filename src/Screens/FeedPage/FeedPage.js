@@ -106,6 +106,7 @@ function FeedPage() {
     goToSearchPage(history)
   }
 
+
   return (
     <>
     <Header title="FutureEats" />

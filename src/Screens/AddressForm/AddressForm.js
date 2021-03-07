@@ -5,6 +5,8 @@ import Buttons from "../../Components/Buttons/index";
 import useForm from "../../Hooks/useForm";
 import { goToFeed } from "../../Routes/Coordinator";
 import { useHistory } from "react-router-dom";
+import { getUserAddress } from "./../../Services/user";
+import GlobalStateContext from './../../Global/GlobalStateContext';
 
 const AddressForm = () => {
   const [form, onChange, clearFields] = useForm({
@@ -35,12 +37,18 @@ const AddressForm = () => {
       .then((res) => {
         alert("Cadastrado finalizado com sucesso");
         localStorage.removeItem("token");
+        localStorage.removeItem("reg-body");
         localStorage.setItem("token", res.data.token);
-        clearFields();
+        localStorage.setItem("hasAddress", true);
         goToFeed(history);
       })
       .catch((err) => {
-        alert(err);
+        const errorArray = err.message.split(" ");
+        if (errorArray[errorArray.length - 1] === "409") {
+          alert("Endereço já cadastrado para esse usuário");
+        } else {
+          alert(err.message);
+        }
       });
   };
 
@@ -101,7 +109,7 @@ const AddressForm = () => {
           required
           type={"text"}
         />
-        <Buttons text={"Salvar"} type={"subit"}></Buttons>
+        <Buttons text={"Salvar"} type={"submit"}></Buttons>
       </form>
     </div>
   );
