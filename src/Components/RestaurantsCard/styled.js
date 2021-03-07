@@ -1,13 +1,15 @@
 import styled from "styled-components";
 
 export const ResCard = styled.div`
+  width: 100vw;
+  max-width: 420px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width:360px;
-  height:196px;
-  margin:8px 0 0;
-  padding:8px 16px 0;
+  /* width: 360px; */
+  height: 196px;
+  margin: 8px 0 0;
+  padding: 8px 16px 0;
 
   #Rectangle {
     width: 329px;
@@ -16,7 +18,7 @@ export const ResCard = styled.div`
     border-radius: 8px;
     border: solid 1px var(--greyish);
 
-    img{
+    img {
       width: 328px;
       height: 120px;
       margin: 0 0 12px;
@@ -45,7 +47,7 @@ export const Info = styled.div`
     width: 148px;
     height: 18px;
     margin: 4px 8px 0 16px;
-    font-family: 'Roboto';
+    font-family: "Roboto";
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -59,7 +61,7 @@ export const Info = styled.div`
     width: 140px;
     height: 18px;
     margin: 4px 16px 0 8px;
-    font-family: 'Roboto';
+    font-family: "Roboto";
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;

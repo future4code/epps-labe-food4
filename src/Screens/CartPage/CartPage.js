@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import CartCard from "../../Components/CartCard/index";
 import {
+  // Button,
   FormControl,
   FormControlLabel,
   Radio,
@@ -16,18 +17,29 @@ import {
   PaymentMethodText,
   CheckBox,
   Title,
+  RestaurantContainer,
+  RestaurantTitle,
+  RestaurantAddress,
+  RestaurantDelivery,
+  ButtonContainer,
+  Button,
+  PaymentContainer,
 } from "./styled";
 import Buttons from "../../Components/Buttons";
-import { getUserAdress, placeOrder } from "../../Services/user";
+import { getUserAddress, placeOrder } from "../../Services/user";
 import GlobalStateContext from "../../GlobalState/GlobalStateContext";
+import Header from "../../Components/Header/index";
+import Footer from "../../Components/Footer/index";
+import { useHistory } from "react-router";
 
-export const CartPage = () => {
+const CartPage = () => {
+  const history = useHistory();
   const { states, setters } = useContext(GlobalStateContext);
   const [paymentMethod, setPaymentMethod] = useState("");
-  const [userAdress, setUserAdress] = useState(undefined);
+  const [userAddress, setUserAddress] = useState(undefined);
 
   useEffect(() => {
-    getUserAdress(setUserAdress);
+    getUserAddress(setUserAddress);
   }, []);
 
   const onChangePay = (event) => {
@@ -37,94 +49,113 @@ export const CartPage = () => {
   const sendOrder = () => {
     if (!paymentMethod) {
       alert("Selecione um método de pagamento.");
-    } else if (Object.entries(states.cart).length !== 0) {
-      const productsArray = states.cart.products
-        .filter((item) => {
-          return item.quantity > 0;
-        })
-        .map((product) => {
-          return {
-            id: product.id,
-            quantity: product.quantity,
-          };
-        });
+    } else if (states.cart.length > 0) {
+      const productsArray = states.cart[0].order.map((item) => {
+        return {
+          id: item.id,
+          quantity: item.amount,
+        };
+      });
+      // .filter((item) => {
+      //   return item.quantity > 0;
+      // })
+      // .map((product) => {
+      //   return {
+      //     id: product.id,
+      //     quantity: product.quantity,
+      //   };
+      // });
 
       const body = {
         products: productsArray,
         paymentMethod: paymentMethod,
       };
-      placeOrder(body, states.cart.id);
+      placeOrder(body, states.cart.restaurantId, history);
     } else {
       alert("Escolha um produto!");
     }
   };
 
   const removeItemFromCart = (id) => {
-    const newProducts = states.cart.products.map((product) => {
-      if (product.id === id) {
-        const newQuantity = product.quantity - 1;
+    const newProducts = states.cart[0].order.map((item) => {
+      if (item.id === id) {
+        const newQuantity = item.quantity - 1;
         const completeProduct = {
-          ...product,
+          ...item,
           quantity: newQuantity,
         };
         return completeProduct;
       } else {
-        return product;
+        return item;
       }
     });
-    const newCart = { ...states.cart, products: newProducts };
+    const newCart = { ...states.cart, item: newProducts };
     setters.setCart(newCart);
   };
 
   const subTotal = () => {
     let number = 0;
-    if (Object.entries(states.cart).length !== 0) {
-      states.cart.products.forEach((item) => {
+    if (Object.entries(states.cart).length > 0) {
+      states.cart[0].order.forEach((item) => {
         number += item.price * item.quantity;
       });
-      return states.cart.shipping + number;
+      return (states.cart[0].shipping + number).toFixed(2);
     }
     return 0;
   };
 
   return (
     <CartContainer>
+      {/* <Header /> */}
       <AdressContainer>
         <AdressDelivery>Endereço de entrega</AdressDelivery>
-        {userAdress ? (
-          <p>{`${userAdress.street}, ${userAdress.number}`}</p>
+        {userAddress ? (
+          <p>{`${userAddress.street}, ${userAddress.number}`}</p>
         ) : (
           <p>Buscando endereço...</p>
         )}
       </AdressContainer>
 
-      {Object.entries(states.cart).length !== 0 ? (
-        states.cart.products.map((product) => {
-          if (product.quantity > 0) {
-            return (
-              <CartCard
-                id={product.id}
-                quantity={product.quantity}
-                img={product.photoUrl}
-                name={product.name}
-                description={product.description}
-                price={product.price}
-                removeItem={removeItemFromCart}
-              />
-            );
-          }
+      <RestaurantContainer>
+        <RestaurantTitle>
+          {states.cart.length > 0 && states.cart[0].restaurant}
+        </RestaurantTitle>
+        <RestaurantAddress>
+          {states.cart.length > 0 && states.cart[0].address}
+        </RestaurantAddress>
+        <RestaurantDelivery>
+          {states.cart.length > 0 && states.cart[0].deliveryTime}
+        </RestaurantDelivery>
+      </RestaurantContainer>
+
+      {states.cart.length > 0 ? (
+        states.cart[0].order.map((product) => {
+          return (
+            <CartCard
+              id={product.id}
+              quantity={product.quantity}
+              img={product.photoUrl}
+              name={product.name}
+              description={product.description}
+              price={product.price}
+              removeItem={removeItemFromCart}
+            />
+          );
         })
       ) : (
         <Title>Carrinho vazio</Title>
       )}
 
-      <ShippingText>Frete R${states.cart.shipping}.00</ShippingText>
+      <ShippingText>
+        {" "}
+        Frete R${states.cart.length > 0 && states.cart[0].shipping.toFixed(2)}
+      </ShippingText>
       <SubtotalPrice>
         <p>SUBTOTAL</p>
-        <TotalPrice>R${subTotal()}.00</TotalPrice>
+        <TotalPrice>R${subTotal()}</TotalPrice>
       </SubtotalPrice>
 
-      <PaymentMethodText>Forma de pagamento</PaymentMethodText>
+        <PaymentMethodText>Forma de pagamento</PaymentMethodText>
       <CheckBox>
         <FormControl component="fieldset" required={true}>
           <RadioGroup
@@ -145,7 +176,12 @@ export const CartPage = () => {
           </RadioGroup>
         </FormControl>
       </CheckBox>
-      <Buttons text="CONFIRMAR" onClick={sendOrder}></Buttons>
+      <ButtonContainer>
+        <Button onClick={sendOrder}>CONFIRMAR</Button>
+      </ButtonContainer>
+      <Footer />
     </CartContainer>
   );
 };
+
+export default CartPage;

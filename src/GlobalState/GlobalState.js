@@ -3,9 +3,10 @@ import GlobalStateContext from "./GlobalStateContext";
 
 const GlobalState = (props) => {
   const [cart, setCart] = useState([]);
+  const [address, setAddress] = useState(true);
 
-  const states = { cart };
-  const setters = { setCart };
+  const states = { cart, address };
+  const setters = { setCart, setAddress };
   const requests = {};
 
   const data = { states, setters, requests };

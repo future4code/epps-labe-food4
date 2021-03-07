@@ -1,16 +1,22 @@
-import styled from 'styled-components'
+import styled from "styled-components";
+
+export const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 export const TitleEnter = styled.div`
-    width: 360px;
-    height: 42px;
-    margin: 16px 0 0;
-    padding: 12px 32px;
-    
+  width: 360px;
+  height: 42px;
+  margin: 16px 0 0;
+  padding: 12px 32px;
 
-    p {
+  p {
     width: 296px;
     height: 18px;
-    font-family:"Roboto";
+    font-family: "Roboto";
     font-size: 16px;
     font-weight: normal;
     font-stretch: normal;
@@ -21,11 +27,11 @@ export const TitleEnter = styled.div`
     color: #000000;
     margin: 0;
   }
-`
+`;
 
 export const LogoImgRegister = styled.img`
-    width: 104px;
-    height: 58px;
-    margin: 24px 128px 16px;
-    object-fit: contain;
-`
+  width: 104px;
+  height: 58px;
+  margin: 24px 128px 16px;
+  object-fit: contain;
+`;

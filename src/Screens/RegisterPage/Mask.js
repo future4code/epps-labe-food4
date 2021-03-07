@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const cpfMask = value => {
   return value
     .replace(/\D/g, '') 

@@ -1,5 +1,5 @@
 import React from "react";
-import {VisibleDiv, P} from './Styled'
+import { VisibleDiv, P } from "./Styled";
 import { ThemeProvider } from "@material-ui/core";
 import clsx from "clsx";
 import { makeStyles } from "@material-ui/core/styles";
@@ -13,10 +13,9 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import theme from "./Theme/theme";
 
 function ComponentInputs(props) {
+  const verificar = props.errorPassword;
 
-  const verificar = props.errorPassword
-
-  console.log('verificar', verificar)
+  console.log("verificar", verificar);
 
   const useStyles = makeStyles((theme) => ({
     root: {
@@ -59,8 +58,8 @@ function ComponentInputs(props) {
           <InputLabel htmlFor="outlined-adornment-password">
             {props.label}
           </InputLabel>
-          <OutlinedInput    
-            error={props.errorPassword}        
+          <OutlinedInput
+            error={props.errorPassword}
             name={props.name}
             placeholder={props.placeholder}
             id="outlined-adornment-password"
@@ -81,11 +80,12 @@ function ComponentInputs(props) {
             }
             labelWidth={70}
           />
-          <VisibleDiv errorPassword={props.errorPassword} visible={'none'}><P>Deve ser a mesma que a anterior</P></VisibleDiv>
+          <VisibleDiv errorPassword={props.errorPassword} visible={"none"}>
+            <P>Deve ser a mesma que a anterior</P>
+          </VisibleDiv>
         </FormControl>
       </div>
     </ThemeProvider>
   );
-
 }
 export default ComponentInputs;

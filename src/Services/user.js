@@ -1,7 +1,8 @@
 import axios from "axios";
 import { BASE_URL } from "../Constants/Urls";
+import { goToHome } from "../Routes/Coordinator";
 
-export const getUserAdress = (setUserAdress) => {
+export const getUserAddress = (setUserAddress) => {
   axios
     .get(`${BASE_URL}/profile/address`, {
       headers: {
@@ -9,35 +10,35 @@ export const getUserAdress = (setUserAdress) => {
       },
     })
     .then((response) => {
-      setUserAdress(response.data.address);
+      setUserAddress(response.data.address);
     })
-    .catch((error) => {
-      console.log(error.response);
-    });
+    .catch((error) => {});
 };
 
-export const placeOrder = (body, id) => {
+export const placeOrder = (body, restaurantId, history) => {
   axios
-    .post(`${BASE_URL}/${id}/order`, body, {
+    .post(`${BASE_URL}/restaurants/${restaurantId}/order`, body, {
       headers: {
         auth: localStorage.getItem("token"),
       },
     })
     .then((response) => {
-      alert("O pedido foi recebido pelo resturante!");
+      alert("Seu pedido foi recebido pelo restaurante!");
+      goToHome(history);
+      console.log("Deu certo", response);
     })
     .catch((error) => {
       const errorArray = error.message.split(" ");
+      console.log("Deu erro", error.response);
       if (errorArray[errorArray.length - 1] === "409") {
         alert("Você já tem um pedido em andamento");
       }
-      console.log(error.response);
     });
 };
 
 export const getActiveOrder = (setOrder) => {
   axios
-    .get(`${BASE_URL}/activer-order`, {
+    .get(`${BASE_URL}/active-order`, {
       headers: {
         auth: localStorage.getItem("token"),
       },
@@ -45,7 +46,5 @@ export const getActiveOrder = (setOrder) => {
     .then((response) => {
       setOrder(response.data.order);
     })
-    .catch((error) => {
-      console.log(error);
-    });
+    .catch((error) => {});
 };

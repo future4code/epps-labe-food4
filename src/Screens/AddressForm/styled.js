@@ -1,25 +1,24 @@
 import styled from "styled-components";
 
-export const ContainerBtn = styled.div`
+export const Wrapper = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  width: 100%;
-  margin: 8px 0;
+  align-items: center;
 `;
 
-export const Btn = styled.button`
-  width: 328px;
-  height: 42px;
-  padding: 12px 16px;
-  border-radius: 2px;
-  border: none;
-  background-color: #5cb646;
-  cursor: pointer;
+export const LogoImgRegister = styled.img`
+  width: 104px;
+  height: 58px;
+  margin: 24px 128px 16px;
+  object-fit: contain;
+`;
 
-  &:focus {
-    outline: none;
-    background-color: #66a557;
-  }
+export const TitleAddress = styled.div`
+  width: 360px;
+  height: 42px;
+  margin: 16px 0 0;
+  padding: 12px 32px;
 
   p {
     width: 296px;
