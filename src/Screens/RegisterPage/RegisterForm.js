@@ -6,7 +6,6 @@ import Buttons from "../../Components/Buttons/index";
 import useForm from "../../Hooks/useForm";
 import { useHistory } from "react-router-dom";
 import { cpfMask } from "./Mask";
-// import AddressPage from "./../AddressForm/AddressPage";
 import { goToAddressPage } from "../../Routes/Coordinator";
 
 const RegisterForm = () => {
@@ -59,7 +58,6 @@ const RegisterForm = () => {
       )
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        // clearFields();
         localStorage.setItem("reg-body", JSON.stringify(body))
         goToAddressPage(history);
       })

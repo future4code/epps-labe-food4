@@ -38,10 +38,6 @@ function ComponentInputs(props) {
         password: '',
         showPassword: false,
     });
-/* 
-    const handleChange = (prop) => (event) => {
-        setValues({ ...values, [prop]: event.target.value });
-    }; */
 
     const handleClickShowPassword = () => {
         setValues({ ...values, showPassword: !values.showPassword });
@@ -62,7 +58,6 @@ function ComponentInputs(props) {
                         type={values.showPassword ? 'text' : 'password'}
                         value={props.value}
                         onChange={props.onChangeInput}
-                        /* onChange={handleChange('password')} */
                         endAdornment={
                             <InputAdornment position="end" className={'inputBox'}>
                                 <IconButton

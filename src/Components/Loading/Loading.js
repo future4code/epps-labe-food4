@@ -5,7 +5,7 @@ import { LoadingContainer } from "./styled";
 const Loading = () => {
   return (
     <LoadingContainer>
-      {/* <CircularProgress /> */}
+      <CircularProgress />
     </LoadingContainer>
   );
 };

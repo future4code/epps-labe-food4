@@ -22,6 +22,7 @@ const MenuItemCard = (props) => {
     if (cartArray[idx].order.length == 1) {
       cartArray.splice(idx, 1);
       setters.setCart(cartArray);
+      localStorage.setItem("cart", JSON.stringify(cartArray));
     } else {
       const prodIdx = cartArray[idx].order
         .map((item) => {
@@ -30,6 +31,7 @@ const MenuItemCard = (props) => {
         .indexOf(props.productId);
       cartArray[idx].order.splice(prodIdx, 1);
       setters.setCart(cartArray);
+      localStorage.setItem("cart", JSON.stringify(cartArray));
     }
     setQuantity(0);
   };
@@ -63,8 +65,8 @@ const MenuItemCard = (props) => {
           },
         ],
       };
-      // cartArray.push(orderInfo);
       setters.setCart([orderInfo]);
+      localStorage.setItem("cart", JSON.stringify([orderInfo]));
 
     } else {
       const orderInfo = {
@@ -77,6 +79,7 @@ const MenuItemCard = (props) => {
       };
       cartArray[idx].order.push(orderInfo);
       setters.setCart(cartArray);
+      localStorage.setItem("cart", JSON.stringify(cartArray));
     }
   };
 

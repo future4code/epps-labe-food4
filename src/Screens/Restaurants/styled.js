@@ -6,6 +6,7 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
   width: fit-content;
+  margin-bottom: 70px;
   cursor: default;
 
   #menu-section {

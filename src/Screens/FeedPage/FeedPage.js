@@ -20,6 +20,7 @@ import { getActiveOrder } from "../../Services/user";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import { deliveryText } from './../../Global/Functions';
+import Loading from "../../Components/Loading/Loading";
 
 function FeedPage() {
   useProtectedPage();
@@ -28,6 +29,7 @@ function FeedPage() {
   const [category, setCategory] = useState("");
   const [inputName, setInputName] = useState("");
   const [order, setOrder] = useState(null);
+  const[loading, setLoading] = useState(true)
 
   useEffect(() => {
     getRestaurants();
@@ -46,6 +48,7 @@ function FeedPage() {
       )
       .then((res) => {
         setRestaurants(res.data.restaurants);
+        setLoading(false)
       })
       .catch((err) => {
         alert(err.response);
@@ -67,9 +70,6 @@ function FeedPage() {
             return restaurant.category.includes(category);
           }
         })
-        /* .filter((restaurant) =>
-          restaurant.name.toLowerCase().includes(inputName.toLowerCase())
-        ); */
 
     return list;
   };
@@ -93,14 +93,8 @@ function FeedPage() {
   //capturando o value da categoria clicada e chamando a função que filtra os restaurantes
   const onClickCategory = (categoryValue) => {
     setCategory(categoryValue);
-    filterList(categoryValue/* , inputName */);
+    filterList(categoryValue);
   };
-
-  //capturando o value do input e chamando a função que filtra os restaurantes
-  /* const onChangeName = (e) => {
-    setInputName(e.target.value);
-    filterList(category, inputName);
-  }; */
 
   const onClickSearch = () =>{
     goToSearchPage(history)
@@ -110,9 +104,8 @@ function FeedPage() {
   return (
     <>
     <Header title="FutureEats" />
-      <FeedPageContainer>
+      {loading ? <Loading/> : <FeedPageContainer>
         <SearchFilter
-          /* onChangeName={onChangeName} */
           onClickSearch={onClickSearch}
           name={inputName}
           restaurants={restaurants}
@@ -136,7 +129,7 @@ function FeedPage() {
             </TextOrderContainer>
           </OrderBar>
         )}
-      </FeedPageContainer>
+      </FeedPageContainer>}
       <Footer/>
     </>
   );

@@ -11,7 +11,7 @@ const RestaurantsCard = (props) => {
         <p id="Restaurant">{props.restaurant}</p>
         <Info>
           <p id="Delivery-Time">{props.deliveryTime} min</p>
-          <p id="Tax">Frete R${props.tax.toFixed(2)}</p>
+          <p id="Tax">Frete R${props.tax}</p>
         </Info>
       </div>
     </ResCard>

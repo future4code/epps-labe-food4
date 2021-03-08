@@ -37,30 +37,6 @@ const LoginForm = () => {
       });
   };
 
-  // const [address, setAddress] = useState();
-  // const getProfile = () => {
-  //   axios
-  //     .get(
-  //       `https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/profile`,
-  //       {
-  //         headers: {
-  //           auth: localStorage.getItem("token"),
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       setters.setAddress(res.data.user.hasAddress);
-  //       if (states.address === true) {
-  //         goToFeed(history);
-  //       } else {
-  //         goToRegister(history);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
-  // };
-
   return (
     <div>
       <form onSubmit={onSubmitForm}>
