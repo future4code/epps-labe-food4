@@ -1,46 +1,34 @@
 import React from "react";
-import {
-  Card,
-  CardContainer,
-  ContentContainer,
-  Img,
-  MainContainer,
-  QuantityCard,
-  RemoveButton,
-  TitleCard,
-} from "./styled";
+import { Card } from "./styled";
 
 const CartCard = (props) => {
   return (
     <Card>
-      <CardContainer>
-        <div>
-          <Img src={props.img} />
+      <div id="Rectangle">
+        <div id="Image">
+          <img src={props.img} />
         </div>
-        <ContentContainer>
-          <div>
-            <TitleCard>{props.title}</TitleCard>
-            <QuantityCard>
+        <div id="Content">
+          <div id="Header">
+            <p id="Title">{props.title}</p>
+            <div id="Quantity">
               <p>{props.quantity}</p>
-            </QuantityCard>
-            <div>
-              <p>{props.name}</p>
             </div>
           </div>
-          <MainContainer>
+          <div id="Main">
             <p>{props.description}</p>
-          </MainContainer>
-          <div>
-            <p>R${parseFloat(props.price).toFixed(2)}</p>
-            <RemoveButton
-              id="remove-btn"
+          </div>
+          <div id="Footer">
+            <p>R${props.price}</p>
+            <button
+              id="Btn"
               onClick={() => props.removeItem(props.id)}
             >
               remover
-            </RemoveButton>
+            </button>
           </div>
-        </ContentContainer>
-      </CardContainer>
+        </div>
+      </div>
     </Card>
   );
 };

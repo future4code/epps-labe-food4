@@ -20,6 +20,7 @@ import { getActiveOrder } from "../../Services/user";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
 import { deliveryText } from "./../../Global/Functions";
+import Loading from "./../../Components/Loading/Loading";
 
 function FeedPage() {
   useProtectedPage();
@@ -28,6 +29,7 @@ function FeedPage() {
   const [category, setCategory] = useState("");
   const [inputName, setInputName] = useState("");
   const [order, setOrder] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getRestaurants();
@@ -46,6 +48,7 @@ function FeedPage() {
       )
       .then((res) => {
         setRestaurants(res.data.restaurants);
+        setLoading(false);
       })
       .catch((err) => {
         alert(err.response);
@@ -80,7 +83,7 @@ function FeedPage() {
         img={res.logoUrl}
         restaurant={res.name}
         deliveryTime={deliveryTime}
-        tax={res.shipping}
+        tax={Number(res.shipping).toFixed(2)}
         onClick={() => goToRestaurant(history, res.id)}
       />
     );
@@ -98,34 +101,38 @@ function FeedPage() {
   return (
     <>
       <Header title="FutureEats" />
-      <FeedPageContainer>
-        <SearchFilter
-          onClickSearch={onClickSearch}
-          name={inputName}
-          restaurants={restaurants}
-          setRestaurants={setRestaurants}
-        />
-        <CategoryFilter
-          restaurants={restaurants}
-          onClickCategory={onClickCategory}
-        />
+      {loading ? (
+        <Loading />
+      ) : (
+        <FeedPageContainer>
+          <SearchFilter
+            onClickSearch={onClickSearch}
+            name={inputName}
+            restaurants={restaurants}
+            setRestaurants={setRestaurants}
+          />
+          <CategoryFilter
+            restaurants={restaurants}
+            onClickCategory={onClickCategory}
+          />
 
-        <ContainerCardFeed>{render}</ContainerCardFeed>
-        {order && (
-          <OrderBar>
-            <IconContainer>
-              <img src={clock} />
-            </IconContainer>
-            <TextOrderContainer>
-              <TextOrder>Pedido em andamento</TextOrder>
-              {order.restaurantName}
-              <SubTotalText>
-                SUBTOTAL R$ {order.totalPrice.toFixed(2)}
-              </SubTotalText>
-            </TextOrderContainer>
-          </OrderBar>
-        )}
-      </FeedPageContainer>
+          <ContainerCardFeed>{render}</ContainerCardFeed>
+          {order && (
+            <OrderBar>
+              <IconContainer>
+                <img src={clock} alt="" />
+              </IconContainer>
+              <TextOrderContainer>
+                <TextOrder>Pedido em andamento</TextOrder>
+                {order.restaurantName}
+                <SubTotalText>
+                  SUBTOTAL R$ {order.totalPrice.toFixed(2)}
+                </SubTotalText>
+              </TextOrderContainer>
+            </OrderBar>
+          )}
+        </FeedPageContainer>
+      )}
       <Footer />
     </>
   );

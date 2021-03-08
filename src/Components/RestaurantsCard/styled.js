@@ -16,14 +16,23 @@ export const ResCard = styled.div`
     padding: 0 0 16px;
     border-radius: 8px;
     border: solid 1px var(--greyish);
+    overflow: hidden;
     cursor: pointer;
 
     img {
       width: 328px;
       height: 120px;
       margin: 0 0 12px;
+    }
+  }
+
+  #Image {
+    position: relative;
+    overflow: hidden;
+    #card-img {
       object-fit: contain;
     }
+
   }
 
   #Restaurant {

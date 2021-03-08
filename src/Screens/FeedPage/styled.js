@@ -7,7 +7,7 @@ export const FeedPageContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-bottom: 170px;
+  margin-bottom: 70px;
 `;
 
 export const ContainerCardFeed = styled.div`

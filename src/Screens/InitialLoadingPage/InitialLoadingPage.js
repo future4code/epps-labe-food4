@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import logo from "../../Imgs/logo-future-eats.png";
-import { InitialLoadingPageContainer, LoadingContainer, Logo } from "./styled";
+import { InitialLoadingPageContainer, Logo } from "./styled";
 
 const InitialLoadingPage = (props) => {
   useEffect(() => {
