@@ -97,13 +97,13 @@ const CartPage = () => {
     let number = 0;
     if (Object.entries(states.cart).length > 0) {
       states.cart[0].order.forEach((item) => {
-        number += item.price * item.quantity;
+        number += Number(item.price) * Number(item.quantity);
       });
-      return Number(states.cart[0].shipping + number).toFixed(2);
+      return Number(Number(states.cart[0].shipping) + number).toFixed(2);
     }
     return 0;
   };
-
+  
   const deliveryTime = states.cart.legngth > 0 && deliveryText(states.cart[0]);
 
   return (
