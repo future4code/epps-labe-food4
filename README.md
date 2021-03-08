@@ -8,12 +8,12 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 * Material - UI
 * Styled-Components
 * React-dom-router
-* 
+
 ## 💻 Projeto
 Projeto desenvolvido durante o final do curso de Front-End da Labenu. 
 
 ## Surge
-[FutureEats](http://jazzy-apple.surge.sh/)
+[FutureEats](http://epps4-future-eats.surge.sh/)
 
 ## 🚀 Como executar
 * Clone o repositório

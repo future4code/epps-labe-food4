@@ -9,11 +9,14 @@ import Footer from "../../Components/Footer";
 import { deliveryText } from "./../../Global/Functions";
 import { useProtectedPage } from "../../Hooks/useProtectedPage";
 import Header from "../../Components/Header";
+import Loading from "../../Components/Loading/Loading";
 
 const Restaurants = () => {
   useProtectedPage();
   const { restaurantId } = useParams();
   const [restaurant, setRestaurant] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const getRestaurants = async () => {
     const headers = { headers: { auth: localStorage.getItem("token") } };
     try {
@@ -22,6 +25,7 @@ const Restaurants = () => {
         headers
       );
       setRestaurant(res.data.restaurant);
+      setLoading(false)
     } catch (err) {
       alert(err.message);
     }
@@ -48,49 +52,55 @@ const Restaurants = () => {
   return (
     <>
       <Header title="Restaurante" arrow="true" />
-      <Container>
-        <RestaurantInfo
-          logoUrl={restaurant.logoUrl}
-          name={restaurant.name}
-          category={restaurant.category}
-          deliveryTime={deliveryTime}
-          shipping={
-            restaurant && restaurant.shipping && restaurant.shipping.toFixed(2)
-          }
-          address={restaurant.address}
-        />
-        <MenuSection>
-          {menuCategories.map((category) => {
-            return (
-              <div key={category}>
-                <MenuCategory>{category}</MenuCategory>
-                <hr />
-                {restaurant &&
-                  restaurant.products &&
-                  restaurant.products.map((item) => {
-                    if (item.category === category) {
-                      return (
-                        <MenuItemCard
-                          key={item.id}
-                          restaurantId={restaurant.id}
-                          name={restaurant.name}
-                          address={restaurant.address}
-                          deliveryTime={deliveryTime}
-                          shipping={restaurant.shipping}
-                          productId={item.id}
-                          img={item.photoUrl}
-                          title={item.name}
-                          description={item.description}
-                          price={item.price.toFixed(2)}
-                        />
-                      );
-                    }
-                  })}
-              </div>
-            );
-          })}
-        </MenuSection>
-      </Container>
+      {loading ? (
+        <Loading />
+      ) : (
+        <Container>
+          <RestaurantInfo
+            logoUrl={restaurant.logoUrl}
+            name={restaurant.name}
+            category={restaurant.category}
+            deliveryTime={deliveryTime}
+            shipping={
+              restaurant &&
+              restaurant.shipping &&
+              Number(restaurant.shipping).toFixed(2)
+            }
+            address={restaurant.address}
+          />
+          <MenuSection>
+            {menuCategories.map((category) => {
+              return (
+                <div key={category}>
+                  <MenuCategory>{category}</MenuCategory>
+                  <hr />
+                  {restaurant &&
+                    restaurant.products &&
+                    restaurant.products.map((item) => {
+                      if (item.category === category) {
+                        return (
+                          <MenuItemCard
+                            key={item.id}
+                            restaurantId={restaurant.id}
+                            name={restaurant.name}
+                            address={restaurant.address}
+                            deliveryTime={deliveryTime}
+                            shipping={Number(restaurant.shipping).toFixed(2)}
+                            productId={item.id}
+                            img={item.photoUrl}
+                            title={item.name}
+                            description={item.description}
+                            price={Number(item.price).toFixed(2)}
+                          />
+                        );
+                      }
+                    })}
+                </div>
+              );
+            })}
+          </MenuSection>
+        </Container>
+      )}
       <Footer />
     </>
   );

@@ -10,9 +10,8 @@ export const Container = styled.div`
 `;
 
 export const MenuSection = styled.div`
-  height: 1px;
   border: none;
-  margin: 8px 16px -8px;
+  margin: 0px 16px 70px;
 `;
 
 export const MenuCategory = styled.div`
@@ -22,7 +21,6 @@ export const MenuCategory = styled.div`
   font-size: 16px;
   letter-spacing: -0.39px;
   color: #000000;
-  margin-top: 16px;
 `;
 
 export const Info = styled.div`

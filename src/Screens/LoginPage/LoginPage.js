@@ -16,7 +16,7 @@ const LoginPage = () => {
     if (token && hasAddress) {
       goToFeed(history);
     }
-  }, []);
+  }, [history]);
 
   return (
     <>

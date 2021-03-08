@@ -30,6 +30,7 @@ import Footer from "../../Components/Footer/index";
 import { useHistory } from "react-router";
 import { deliveryText } from "./../../Global/Functions";
 import { useProtectedPage } from "../../Hooks/useProtectedPage";
+import Loading from "../../Components/Loading/Loading";
 
 const CartPage = () => {
   useProtectedPage();
@@ -38,9 +39,17 @@ const CartPage = () => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [userAddress, setUserAddress] = useState(undefined);
   const [id, setId] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getUserAddress(setUserAddress);
+    if (states.cart) {
+      const cart = JSON.parse(localStorage.getItem("cart"));
+      if (cart) {
+        setters.setCart(cart);
+      }
+      setLoading(false);
+    }
   }, []);
 
   const onChangePay = (event) => {
@@ -78,6 +87,7 @@ const CartPage = () => {
         .indexOf(id);
       cartArray[0].order.splice(idx, 1);
       setters.setCart(cartArray);
+      localStorage.setItem("cart", JSON.stringify(cartArray));
     } else {
       setters.setCart([]);
     }
@@ -89,7 +99,7 @@ const CartPage = () => {
       states.cart[0].order.forEach((item) => {
         number += item.price * item.quantity;
       });
-      return (states.cart[0].shipping + number).toFixed(2);
+      return Number(states.cart[0].shipping + number).toFixed(2);
     }
     return 0;
   };
@@ -99,78 +109,84 @@ const CartPage = () => {
   return (
     <>
       <Header title="Meu Carrinho" arrow="true" />
-      <CartContainer>
-        <AdressContainer>
-          <AdressDelivery>Endereço de entrega</AdressDelivery>
-          {userAddress ? (
-            <p>{`${userAddress.street}, ${userAddress.number}`}</p>
+      {loading ? (
+        <Loading />
+      ) : (
+        <CartContainer>
+          <AdressContainer>
+            <AdressDelivery>Endereço de entrega</AdressDelivery>
+            {userAddress ? (
+              <p>{`${userAddress.street}, ${userAddress.number}`}</p>
+            ) : (
+              <p>Buscando endereço...</p>
+            )}
+          </AdressContainer>
+
+          <RestaurantContainer>
+            <RestaurantTitle>
+              {states.cart.length > 0 && states.cart[0].restaurant}
+            </RestaurantTitle>
+            <RestaurantAddress>
+              {states.cart.length > 0 && states.cart[0].address}
+            </RestaurantAddress>
+            <RestaurantDelivery>{deliveryTime}</RestaurantDelivery>
+          </RestaurantContainer>
+
+          {states.cart.length > 0 ? (
+            states.cart[0].order.map((product) => {
+              return (
+                <CartCard
+                  key={product.id}
+                  id={product.id}
+                  quantity={product.quantity}
+                  img={product.photoUrl}
+                  title={product.name}
+                  description={product.description}
+                  price={Number(product.price).toFixed(2)}
+                  removeItem={removeItemFromCart}
+                />
+              );
+            })
           ) : (
-            <p>Buscando endereço...</p>
+            <Title>Carrinho vazio</Title>
           )}
-        </AdressContainer>
 
-        <RestaurantContainer>
-          <RestaurantTitle>
-            {states.cart.length > 0 && states.cart[0].restaurant}
-          </RestaurantTitle>
-          <RestaurantAddress>
-            {states.cart.length > 0 && states.cart[0].address}
-          </RestaurantAddress>
-          <RestaurantDelivery>{deliveryTime}</RestaurantDelivery>
-        </RestaurantContainer>
+          <ShippingText>
+            {" "}
+            Frete R$
+            {states.cart.length > 0 && Number(states.cart[0].shipping).toFixed(2)}
+          </ShippingText>
+          <SubtotalPrice>
+            <p>SUBTOTAL</p>
+            <TotalPrice>R${subTotal()}</TotalPrice>
+          </SubtotalPrice>
 
-        {states.cart.length > 0 ? (
-          states.cart[0].order.map((product) => {
-            return (
-              <CartCard
-                id={product.id}
-                quantity={product.quantity}
-                img={product.photoUrl}
-                name={product.name}
-                description={product.description}
-                price={product.price}
-                removeItem={removeItemFromCart}
-              />
-            );
-          })
-        ) : (
-          <Title>Carrinho vazio</Title>
-        )}
-
-        <ShippingText>
-          {" "}
-          Frete R${states.cart.length > 0 && states.cart[0].shipping.toFixed(2)}
-        </ShippingText>
-        <SubtotalPrice>
-          <p>SUBTOTAL</p>
-          <TotalPrice>R${subTotal()}</TotalPrice>
-        </SubtotalPrice>
-
-        <PaymentMethodText>Forma de pagamento</PaymentMethodText>
-        <CheckBox>
-          <FormControl component="fieldset" required={true}>
-            <RadioGroup
-              name="paymentMethod"
-              value={paymentMethod}
-              onChange={onChangePay}
-            >
-              <FormControlLabel
-                value="money"
-                control={<Radio color="var(--mid-green)" />}
-                label="Dinheiro"
-              />
-              <FormControlLabel
-                value="creditcard"
-                control={<Radio color="var(--mid-green)" />}
-                label="Cartão de crédito"
-              />
-            </RadioGroup>
-          </FormControl>
-        </CheckBox>
-        <ButtonContainer>
-          <Button onClick={sendOrder}>CONFIRMAR</Button>
-        </ButtonContainer>
-      </CartContainer>
+          <PaymentMethodText>Forma de pagamento</PaymentMethodText>
+          <CheckBox>
+            <FormControl component="fieldset" required={true}>
+              <RadioGroup
+                name="paymentMethod"
+                value={paymentMethod}
+                onChange={onChangePay}
+              >
+                <FormControlLabel
+                  value="money"
+                  control={<Radio color="var(--mid-green)" />}
+                  label="Dinheiro"
+                />
+                <FormControlLabel
+                  value="creditcard"
+                  control={<Radio color="var(--mid-green)" />}
+                  label="Cartão de crédito"
+                />
+              </RadioGroup>
+            </FormControl>
+          </CheckBox>
+          <ButtonContainer>
+            <Button onClick={sendOrder}>CONFIRMAR</Button>
+          </ButtonContainer>
+        </CartContainer>
+      )}
       <Footer />
     </>
   );
