@@ -1,11 +1,9 @@
 import React from "react";
 import { Info } from "./styled";
-import Header from "../../Components/Header";
 
 const RestaurantInfo = (props) => {
   return (
     <>
-      <Header title="Restaurante" arrow="true" />
       <Info>
         <div id="image">
           <img src={props.logoUrl} alt="restaurant-logo" />

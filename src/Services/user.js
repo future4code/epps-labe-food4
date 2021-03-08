@@ -25,11 +25,9 @@ export const placeOrder = (body, restaurantId, history) => {
     .then((response) => {
       alert("Seu pedido foi recebido pelo restaurante!");
       goToHome(history);
-      console.log("Deu certo", response);
     })
     .catch((error) => {
       const errorArray = error.message.split(" ");
-      console.log("Deu erro", error.response);
       if (errorArray[errorArray.length - 1] === "409") {
         alert("Você já tem um pedido em andamento");
       }

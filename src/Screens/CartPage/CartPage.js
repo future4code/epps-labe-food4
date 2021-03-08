@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import CartCard from "../../Components/CartCard/index";
 import {
-  // Button,
   FormControl,
   FormControlLabel,
   Radio,
@@ -23,22 +22,22 @@ import {
   RestaurantDelivery,
   ButtonContainer,
   Button,
-  PaymentContainer,
 } from "./styled";
-import Buttons from "../../Components/Buttons";
 import { getUserAddress, placeOrder } from "../../Services/user";
 import GlobalStateContext from "../../Global/GlobalStateContext";
 import Header from "../../Components/Header/index";
 import Footer from "../../Components/Footer/index";
 import { useHistory } from "react-router";
 import { deliveryText } from "./../../Global/Functions";
+import { useProtectedPage } from "../../Hooks/useProtectedPage";
 
 const CartPage = () => {
+  useProtectedPage();
   const history = useHistory();
   const { states, setters } = useContext(GlobalStateContext);
   const [paymentMethod, setPaymentMethod] = useState("");
   const [userAddress, setUserAddress] = useState(undefined);
-  const [id, setId] = useState('')
+  const [id, setId] = useState("");
 
   useEffect(() => {
     getUserAddress(setUserAddress);
@@ -53,7 +52,7 @@ const CartPage = () => {
       alert("Selecione um método de pagamento.");
     } else if (states.cart.length > 0) {
       const productsArray = states.cart[0].order.map((item) => {
-        setId(item.id)
+        setId(item.id);
         return {
           id: item.id,
           quantity: item.quantity,
@@ -69,7 +68,6 @@ const CartPage = () => {
       alert("Escolha um produto!");
     }
   };
-console.log('id', states.cart[0] && states.cart[0].id)
   const removeItemFromCart = (id) => {
     let cartArray = [...states.cart];
     if (cartArray[0].order.length > 1) {
@@ -100,7 +98,7 @@ console.log('id', states.cart[0] && states.cart[0].id)
 
   return (
     <>
-      <Header title="Carrinho" arrow="true" />
+      <Header title="Meu Carrinho" arrow="true" />
       <CartContainer>
         <AdressContainer>
           <AdressDelivery>Endereço de entrega</AdressDelivery>
@@ -119,7 +117,6 @@ console.log('id', states.cart[0] && states.cart[0].id)
             {states.cart.length > 0 && states.cart[0].address}
           </RestaurantAddress>
           <RestaurantDelivery>{deliveryTime}</RestaurantDelivery>
-
         </RestaurantContainer>
 
         {states.cart.length > 0 ? (
@@ -174,7 +171,7 @@ console.log('id', states.cart[0] && states.cart[0].id)
           <Button onClick={sendOrder}>CONFIRMAR</Button>
         </ButtonContainer>
       </CartContainer>
-      <Footer/>
+      <Footer />
     </>
   );
 };

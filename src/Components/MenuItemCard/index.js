@@ -19,7 +19,7 @@ const MenuItemCard = (props) => {
         return item.id;
       })
       .indexOf(props.restaurantId);
-    if (cartArray[idx].order.length == 1) {
+    if (cartArray[idx].order.length === 1) {
       cartArray.splice(idx, 1);
       setters.setCart(cartArray);
     } else {
@@ -63,7 +63,6 @@ const MenuItemCard = (props) => {
           },
         ],
       };
-      // cartArray.push(orderInfo);
       setters.setCart([orderInfo]);
 
     } else {

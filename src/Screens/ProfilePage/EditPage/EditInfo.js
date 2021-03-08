@@ -8,8 +8,11 @@ import useRequestData from "../../../Hooks/useRequestData";
 import useForm from "../../../Hooks/useForm";
 import axios from "axios";
 import { cpfMask } from "../../RegisterPage/Mask";
+import Header from "../../../Components/Header";
+import { useProtectedPage } from "../../../Hooks/useProtectedPage";
 
 const EditInfo = () => {
+  useProtectedPage();
   const history = useHistory();
   const [form, onChange, clearFields, setValues] = useForm({
     name: "",
@@ -48,6 +51,7 @@ const EditInfo = () => {
 
   return (
     <div>
+      <Header title="Editar" arrow={true} />
       <form onSubmit={handleSubmit}>
         <NormalInput
           name="name"

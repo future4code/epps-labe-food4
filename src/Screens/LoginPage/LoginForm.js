@@ -23,7 +23,7 @@ const LoginForm = () => {
       )
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("hasAddress", res.data.user.hasAddress)
+        localStorage.setItem("hasAddress", res.data.user.hasAddress);
         if (res.data.user.hasAddress === true) {
           goToFeed(history);
         } else {
@@ -32,34 +32,8 @@ const LoginForm = () => {
         clearFields();
         goToFeed();
       })
-      .catch((err) => {
-        alert(err.message);
-      });
+      .catch((err) => {});
   };
-
-  // const [address, setAddress] = useState();
-  // const getProfile = () => {
-  //   axios
-  //     .get(
-  //       `https://us-central1-missao-newton.cloudfunctions.net/futureEatsA/profile`,
-  //       {
-  //         headers: {
-  //           auth: localStorage.getItem("token"),
-  //         },
-  //       }
-  //     )
-  //     .then((res) => {
-  //       setters.setAddress(res.data.user.hasAddress);
-  //       if (states.address === true) {
-  //         goToFeed(history);
-  //       } else {
-  //         goToRegister(history);
-  //       }
-  //     })
-  //     .catch((err) => {
-  //       alert(err);
-  //     });
-  // };
 
   return (
     <div>

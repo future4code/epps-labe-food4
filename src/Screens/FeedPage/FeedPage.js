@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 import { getActiveOrder } from "../../Services/user";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
-import { deliveryText } from './../../Global/Functions';
+import { deliveryText } from "./../../Global/Functions";
 
 function FeedPage() {
   useProtectedPage();
@@ -59,17 +59,13 @@ function FeedPage() {
   const filterList = () => {
     const list =
       restaurants &&
-      restaurants
-        .filter((restaurant) => {
-          if (category === "Todos") {
-            return restaurant;
-          } else {
-            return restaurant.category.includes(category);
-          }
-        })
-        /* .filter((restaurant) =>
-          restaurant.name.toLowerCase().includes(inputName.toLowerCase())
-        ); */
+      restaurants.filter((restaurant) => {
+        if (category === "Todos") {
+          return restaurant;
+        } else {
+          return restaurant.category.includes(category);
+        }
+      });
 
     return list;
   };
@@ -90,29 +86,20 @@ function FeedPage() {
     );
   });
 
-  //capturando o value da categoria clicada e chamando a função que filtra os restaurantes
   const onClickCategory = (categoryValue) => {
     setCategory(categoryValue);
-    filterList(categoryValue/* , inputName */);
+    filterList(categoryValue);
   };
 
-  //capturando o value do input e chamando a função que filtra os restaurantes
-  /* const onChangeName = (e) => {
-    setInputName(e.target.value);
-    filterList(category, inputName);
-  }; */
-
-  const onClickSearch = () =>{
-    goToSearchPage(history)
-  }
-
+  const onClickSearch = () => {
+    goToSearchPage(history);
+  };
 
   return (
     <>
-    <Header title="FutureEats" />
+      <Header title="FutureEats" />
       <FeedPageContainer>
         <SearchFilter
-          /* onChangeName={onChangeName} */
           onClickSearch={onClickSearch}
           name={inputName}
           restaurants={restaurants}
@@ -132,12 +119,14 @@ function FeedPage() {
             <TextOrderContainer>
               <TextOrder>Pedido em andamento</TextOrder>
               {order.restaurantName}
-              <SubTotalText>SUBTOTAL R$ {order.totalPrice.toFixed(2)}</SubTotalText>
+              <SubTotalText>
+                SUBTOTAL R$ {order.totalPrice.toFixed(2)}
+              </SubTotalText>
             </TextOrderContainer>
           </OrderBar>
         )}
       </FeedPageContainer>
-      <Footer/>
+      <Footer />
     </>
   );
 }

@@ -1,22 +1,19 @@
 import React, { useContext } from "react";
 import { Container } from "./styled";
-import homeIcon from "./Imgs/home-icon.png";
-import homeIconActive from "./Imgs/home-icon-active.png";
-import cartIcon from "./Imgs/cart-icon.png";
-import cartIconActive from "./Imgs/cart-icon-active.png";
-import profileIcon from "./Imgs/profile-icon.png";
-import profileIconActive from "./Imgs/profile-icon-active.png";
+import homeIcon from "../../Imgs/home-icon.png";
+import homeIconActive from "../../Imgs/home-icon-active.png";
+import cartIcon from "../../Imgs/cart-icon.png";
+import cartIconActive from "../../Imgs/cart-icon-active.png";
+import profileIcon from "../../Imgs/profile-icon.png";
+import profileIconActive from "../../Imgs/profile-icon-active.png";
 import { useHistory } from "react-router-dom";
 import { goToCart, goToProfile } from "../../Routes/Coordinator";
 import { goToFeed } from "./../../Routes/Coordinator";
-import GlobalStateContext from './../../Global/GlobalStateContext';
+import GlobalStateContext from "./../../Global/GlobalStateContext";
 
 const Footer = () => {
   const history = useHistory();
-  const {states, setters} = useContext(GlobalStateContext)
-  // const [activeHome, setActiveHome] = useState(false);
-  // const [activeCart, setActiveCart] = useState(false);
-  // const [activeProfile, setActiveProfile] = useState(false);
+  const { states, setters } = useContext(GlobalStateContext);
 
   const homeClick = () => {
     setters.setActiveHome(!states.activeHome);

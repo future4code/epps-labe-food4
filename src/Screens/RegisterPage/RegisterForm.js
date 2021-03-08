@@ -6,7 +6,6 @@ import Buttons from "../../Components/Buttons/index";
 import useForm from "../../Hooks/useForm";
 import { useHistory } from "react-router-dom";
 import { cpfMask } from "./Mask";
-// import AddressPage from "./../AddressForm/AddressPage";
 import { goToAddressPage } from "../../Routes/Coordinator";
 
 const RegisterForm = () => {
@@ -16,7 +15,7 @@ const RegisterForm = () => {
     setDocumentId(cpfMask(e.target.value));
   };
   const [documentId, setDocumentId] = useState("");
-  const [form, onChange, clearFields, setValues] = useForm({
+  const [form, onChange, setValues] = useForm({
     name: "",
     email: "",
     password: "",
@@ -36,7 +35,6 @@ const RegisterForm = () => {
     validatePassword();
   };
 
-  // Para manter os campos preenchidos mesmo mudando de página
   useEffect(() => {
     const regBody = JSON.parse(localStorage.getItem("reg-body"))
     if(regBody){
@@ -59,7 +57,6 @@ const RegisterForm = () => {
       )
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        // clearFields();
         localStorage.setItem("reg-body", JSON.stringify(body))
         goToAddressPage(history);
       })
