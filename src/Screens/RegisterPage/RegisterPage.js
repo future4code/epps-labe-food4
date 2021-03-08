@@ -8,7 +8,6 @@ import Header from "../../Components/Header";
 import { useProtectedPage } from "../../Hooks/useProtectedPage";
 
 const RegisterPage = () => {
-  useProtectedPage();
   const history = useHistory();
 
   useEffect(() => {

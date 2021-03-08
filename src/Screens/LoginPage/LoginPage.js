@@ -3,8 +3,9 @@ import LoginForm from "./LoginForm";
 import Logo from "../../Imgs/logo-future-eats-invert.png";
 import { LogoImg, TitleEnter, TitleRegister } from "./styled";
 import { useHistory, Link } from "react-router-dom";
-import { goToFeed } from "../../Routes/Coordinator";
+import { goToFeed, goToRegister } from "../../Routes/Coordinator";
 import InitialLoadingPage from "../InitialLoadingPage/InitialLoadingPage";
+
 
 const LoginPage = () => {
   const history = useHistory();
@@ -32,9 +33,9 @@ const LoginPage = () => {
           <TitleRegister>
             <p>
               Não possui cadastro?{" "}
-              <Link to="/register/1">
-                <b>Clique aqui.</b>
-              </Link>
+              {/* <Link to="/register/1"> */}
+                <b onClick={() => goToRegister(history)}>Clique aqui.</b>
+              {/* </Link> */}
             </p>
           </TitleRegister>
         </>
