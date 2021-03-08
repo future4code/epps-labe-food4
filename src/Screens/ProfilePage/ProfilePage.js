@@ -14,15 +14,17 @@ import { goToProfileAddress, goToProfileInfo } from "../../Routes/Coordinator";
 import Loading from "../../Components/Loading/Loading";
 import Footer from "../../Components/Footer/index";
 import Header from "../../Components/Header/index";
+import { useProtectedPage } from "../../Hooks/useProtectedPage";
 
 const ProfilePage = () => {
+  useProtectedPage();
   const history = useHistory();
   const profileInfo = useRequestData(`${BASE_URL}/profile`, undefined);
   const ordersHistory = useRequestData(`${BASE_URL}/orders/history`);
 
   return profileInfo ? (
     <div>
-      <Header title="Perfil" arrow="true" />
+      <Header title="Meu perfil" arrow="true" />
 
       <MainContainer>
         <BaseContainer>

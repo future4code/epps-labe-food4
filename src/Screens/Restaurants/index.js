@@ -9,8 +9,10 @@ import Footer from "../../Components/Footer";
 import { deliveryText } from "./../../Global/Functions";
 import Loading from "../../Components/Loading/Loading";
 import Header from './../../Components/Header/index';
+import { useProtectedPage } from './../../Hooks/useProtectedPage';
 
 const Restaurants = () => {
+  useProtectedPage()
   const { restaurantId } = useParams();
   const [restaurant, setRestaurant] = useState([]);
   const [loading, setLoading] = useState(true);

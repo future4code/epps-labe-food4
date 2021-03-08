@@ -7,8 +7,11 @@ import { BASE_URL } from "../../../Constants/Urls";
 import useForm from "../../../Hooks/useForm";
 import useRequestData from "../../../Hooks/useRequestData";
 import axios from "axios";
+import Header from "../../../Components/Header";
+import { useProtectedPage } from "../../../Hooks/useProtectedPage";
 
 const EditAddressPage = () => {
+  useProtectedPage();
   const history = useHistory();
   const [form, onChange, clearFields, setValues] = useForm({
     street: "",
@@ -17,7 +20,7 @@ const EditAddressPage = () => {
     city: "",
     state: "",
     complement: "",
-  }); 
+  });
 
   const axiosConfig = {
     headers: { auth: window.localStorage.getItem("token") },
@@ -29,7 +32,7 @@ const EditAddressPage = () => {
       .then((res) => {
         localStorage.setItem("token", res.data.token);
         window.alert("Endereço atualizado com sucesso!");
-        goToProfile(history)
+        goToProfile(history);
       })
       .catch((error) => {
         window.alert("Algo deu errado!");
@@ -53,6 +56,7 @@ const EditAddressPage = () => {
 
   return (
     <div>
+      <Header title="Endereço" arrow={true} />
       <form onSubmit={handleSubmit}>
         <NormalInput
           label="Logradouro*"

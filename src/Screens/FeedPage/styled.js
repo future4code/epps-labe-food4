@@ -53,5 +53,5 @@ export const SubTotalText = styled.p`
   font-size: 16px;
   font-weight: bold;
   letter-spacing: -0.39px;
-  color: var(--black-25);
+  color: black;
 `;

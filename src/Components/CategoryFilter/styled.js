@@ -8,15 +8,11 @@ export const FilterField = styled.div`
   flex-direction: wrap;
   align-items: center;
   margin-top: 5px;
-  /* margin-right: 16px; */
   overflow-x: scroll;
   ::-webkit-scrollbar {
     height: 4px;
     width: 4px;
     border: 1px solid transparent;
-    /* @media (min-width: 421px) {
-      border: 1px solid #5cb646;
-    } */
   }
 `;
 

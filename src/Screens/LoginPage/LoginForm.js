@@ -23,7 +23,7 @@ const LoginForm = () => {
       )
       .then((res) => {
         localStorage.setItem("token", res.data.token);
-        localStorage.setItem("hasAddress", res.data.user.hasAddress)
+        localStorage.setItem("hasAddress", res.data.user.hasAddress);
         if (res.data.user.hasAddress === true) {
           goToFeed(history);
         } else {
@@ -32,9 +32,7 @@ const LoginForm = () => {
         clearFields();
         goToFeed();
       })
-      .catch((err) => {
-        alert(err.message);
-      });
+      .catch((err) => {});
   };
 
   return (
