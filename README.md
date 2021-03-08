@@ -29,7 +29,7 @@ Projeto desenvolvido durante o final do curso de Front-End da Labenu.
  npm run start
  ```
 
-Grupo:
+## Grupo:
 - Fabio Dos Santos;
 - Daniel Ratti;
 - Bruno Galhardi Vallim;
