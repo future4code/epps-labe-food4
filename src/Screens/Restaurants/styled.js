@@ -7,29 +7,22 @@ export const Container = styled.div`
   align-items: center;
   width: fit-content;
   cursor: default;
+`;
 
-  #menu-section {
-    hr {
-      background-color: #000000;
-      height: 1px;
-      border: none;
-      margin: 8px 16px -8px;
-    }
-    #menu-category {
-      width: 328px;
-      height: 18px;
-      margin: 16px 16px 8px;
-      font-family: "Roboto";
-      font-size: 16px;
-      font-weight: normal;
-      font-stretch: normal;
-      font-style: normal;
-      line-height: normal;
-      letter-spacing: -0.39px;
-      color: #000000;
-      margin-top: 16px;
-    }
-  }
+export const MenuSection = styled.div`
+  height: 1px;
+  border: none;
+  margin: 8px 16px -8px;
+`;
+
+export const MenuCategory = styled.div`
+  width: 328px;
+  height: 18px;
+  margin: 16px 16px 8px;
+  font-size: 16px;
+  letter-spacing: -0.39px;
+  color: #000000;
+  margin-top: 16px;
 `;
 
 export const Info = styled.div`
@@ -37,7 +30,9 @@ export const Info = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
+  width: 100vw;
+  max-width: 420px;
+
   #image {
     display: flex;
     align-items: center;
@@ -53,7 +48,6 @@ export const Info = styled.div`
   #content {
     p {
       height: 18px;
-      font-family: "Roboto";
       font-size: 16px;
       font-weight: normal;
       font-stretch: normal;

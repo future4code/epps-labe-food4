@@ -1,6 +1,6 @@
 import React from "react";
-import { Container } from "./styled";
-import arrow from "./Imgs/back.svg";
+import { Arrow, Container, Img, Title, TitleText } from "./styled";
+import arrow from "../../Imgs/back.svg";
 import { goToBack } from "./../../Routes/Coordinator";
 import { useHistory } from "react-router-dom";
 
@@ -9,15 +9,15 @@ const Header = (props) => {
   const arrowDisplay = props.arrow;
   return (
     <Container>
-      <div id="arrow">
+      <Arrow>
         {" "}
         {arrowDisplay ? (
-          <img src={arrow} alt="" onClick={() => goToBack(history)} />
+          <Img src={arrow} alt="" onClick={() => goToBack(history)} />
         ) : null}
-      </div>
-      <div id="title">
-        <p>{props.title}</p>
-      </div>
+      </Arrow>
+      <Title>
+        <TitleText>{props.title}</TitleText>
+      </Title>
     </Container>
   );
 };

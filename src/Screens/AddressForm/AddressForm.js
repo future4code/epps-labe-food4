@@ -5,11 +5,9 @@ import Buttons from "../../Components/Buttons/index";
 import useForm from "../../Hooks/useForm";
 import { goToFeed } from "../../Routes/Coordinator";
 import { useHistory } from "react-router-dom";
-import { getUserAddress } from "./../../Services/user";
-import GlobalStateContext from './../../Global/GlobalStateContext';
 
 const AddressForm = () => {
-  const [form, onChange, clearFields] = useForm({
+  const [form, onChange] = useForm({
     street: "",
     number: "",
     neighbourhood: "",

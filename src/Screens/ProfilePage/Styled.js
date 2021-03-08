@@ -6,7 +6,7 @@ export const MainContainer = styled.div`
   max-width: 420px;
   box-sizing: border-box;
   display: flex;
-  /* padding: 10px; */
+  padding: 10px;
   gap: 2px;
   flex-direction: column;
   align-items: flex-start;
@@ -16,7 +16,7 @@ export const MainContainer = styled.div`
 export const BaseContainer = styled.div`
   width: 100%;
   display: flex;
-  padding: 10px;
+  padding: 0;
   margin: 0;
   justify-content: space-between;
   align-items: center;
