@@ -13,7 +13,7 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 Projeto desenvolvido durante o final do curso de Front-End da Labenu. 
 
 ## Surge
-[FutureEats](http://epps4-future-eats.surge.sh/)
+[FutureEats](http://futureeats-epps.surge.sh/)
 
 ## 🚀 Como executar
 * Clone o repositório
