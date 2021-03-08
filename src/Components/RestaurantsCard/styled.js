@@ -6,7 +6,6 @@ export const ResCard = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* max-width: 420px; */
   height: 196px;
   margin: 8px 0 0;
   padding: 8px 16px 0;

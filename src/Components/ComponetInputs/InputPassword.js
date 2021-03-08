@@ -13,8 +13,6 @@ import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import theme from "./Theme/theme";
 
 function ComponentInputs(props) {
-  const verificar = props.errorPassword;
-
   const useStyles = makeStyles((theme) => ({
     root: {
       display: "flex",

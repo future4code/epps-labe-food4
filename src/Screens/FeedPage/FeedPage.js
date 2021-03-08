@@ -19,7 +19,7 @@ import { useHistory } from "react-router-dom";
 import { getActiveOrder } from "../../Services/user";
 import Header from "../../Components/Header";
 import Footer from "../../Components/Footer";
-import { deliveryText } from './../../Global/Functions';
+import { deliveryText } from "./../../Global/Functions";
 import Loading from "../../Components/Loading/Loading";
 
 function FeedPage() {
@@ -29,7 +29,7 @@ function FeedPage() {
   const [category, setCategory] = useState("");
   const [inputName, setInputName] = useState("");
   const [order, setOrder] = useState(null);
-  const[loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     getRestaurants();
@@ -48,7 +48,7 @@ function FeedPage() {
       )
       .then((res) => {
         setRestaurants(res.data.restaurants);
-        setLoading(false)
+        setLoading(false);
       })
       .catch((err) => {
         alert(err.response);
@@ -62,14 +62,13 @@ function FeedPage() {
   const filterList = () => {
     const list =
       restaurants &&
-      restaurants
-        .filter((restaurant) => {
-          if (category === "Todos") {
-            return restaurant;
-          } else {
-            return restaurant.category.includes(category);
-          }
-        })
+      restaurants.filter((restaurant) => {
+        if (category === "Todos") {
+          return restaurant;
+        } else {
+          return restaurant.category.includes(category);
+        }
+      });
 
     return list;
   };
@@ -96,41 +95,44 @@ function FeedPage() {
     filterList(categoryValue);
   };
 
-  const onClickSearch = () =>{
-    goToSearchPage(history)
-  }
-
+  const onClickSearch = () => {
+    goToSearchPage(history);
+  };
 
   return (
     <>
-    <Header title="FutureEats" />
-      {loading ? <Loading/> : <FeedPageContainer>
-        <SearchFilter
-          onClickSearch={onClickSearch}
-          name={inputName}
-          restaurants={restaurants}
-          setRestaurants={setRestaurants}
-        />
-        <CategoryFilter
-          restaurants={restaurants}
-          onClickCategory={onClickCategory}
-        />
+      <Header title="FutureEats" />
+      {loading ? (
+        <Loading />
+      ) : (
+        <FeedPageContainer>
+          <SearchFilter
+            onClickSearch={onClickSearch}
+            name={inputName}
+            restaurants={restaurants}
+            setRestaurants={setRestaurants}
+          />
+          <CategoryFilter
+            restaurants={restaurants}
+            onClickCategory={onClickCategory}
+          />
 
-        <ContainerCardFeed>{render}</ContainerCardFeed>
-        {order && (
-          <OrderBar>
-            <IconContainer>
-              <img src={clock} />
-            </IconContainer>
-            <TextOrderContainer>
-              <TextOrder>Pedido em andamento</TextOrder>
-              {order.restaurantName}
-              <SubTotalText>SUBTOTAL R$ {order.totalPrice}</SubTotalText>
-            </TextOrderContainer>
-          </OrderBar>
-        )}
-      </FeedPageContainer>}
-      <Footer/>
+          <ContainerCardFeed>{render}</ContainerCardFeed>
+          {order && (
+            <OrderBar>
+              <IconContainer>
+                <img src={clock} />
+              </IconContainer>
+              <TextOrderContainer>
+                <TextOrder>Pedido em andamento</TextOrder>
+                {order.restaurantName}
+                <SubTotalText>SUBTOTAL R$ {order.totalPrice}</SubTotalText>
+              </TextOrderContainer>
+            </OrderBar>
+          )}
+        </FeedPageContainer>
+      )}
+      <Footer />
     </>
   );
 }

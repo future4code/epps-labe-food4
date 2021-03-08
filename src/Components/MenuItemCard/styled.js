@@ -21,7 +21,7 @@ export const Card = styled.div`
 
   #Image {
     width: 96px;
-    height: 112px;
+    height: 110px;
     margin: 0 16px 0 0;
     border-radius: 8px 0 0 8px;
     overflow: hidden;

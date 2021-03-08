@@ -30,8 +30,10 @@ import Footer from "../../Components/Footer/index";
 import { useHistory } from "react-router";
 import { deliveryText } from "./../../Global/Functions";
 import Loading from "../../Components/Loading/Loading";
+import { useProtectedPage } from './../../Hooks/useProtectedPage';
 
 const CartPage = () => {
+  useProtectedPage();
   const history = useHistory();
   const { states, setters } = useContext(GlobalStateContext);
   const [paymentMethod, setPaymentMethod] = useState("");
