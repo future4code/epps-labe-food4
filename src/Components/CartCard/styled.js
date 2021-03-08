@@ -57,7 +57,8 @@ export const Card = styled.div`
       #Quantity {
         width: 33px;
         height: 33px;
-        margin: 0 0 11px 16px;
+        /* margin: 0 0 11px 16px; */
+        margin: -1px;
         padding: 7px 12px;
         border-radius: 0 8px 0 8px;
         border: 1px solid var(--mid-green);
@@ -101,7 +102,7 @@ export const Card = styled.div`
       #Btn {
         width: 90px;
         height: 31px;
-        margin: 7px 0 0 8px;
+        margin: -1px;
         border-radius: 8px 0 8px 0;
         border: 1px solid;
         border-color: #e02020;
